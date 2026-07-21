@@ -1,0 +1,190 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum OptionUiType {
+  SELECT
+  CARDS
+  NUMBER
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  company   String?
+  role      Role     @default(CUSTOMER)
+  cartItems CartItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("categories")
+}
+
+model Product {
+  id            String               @id @default(cuid())
+  name          String
+  slug          String               @unique
+  description   String
+  basePrice     Float
+  compareAt     Float?
+  rating        Float                @default(4.5)
+  reviews       Int                  @default(0)
+  deliveryDays  Int                  @default(3)
+  badge         String?
+  imageUrl      String?
+  galleryUrls   String[]             @default([])
+  featured      Boolean              @default(false)
+  active        Boolean              @default(true)
+  categoryId    String
+  category      Category             @relation(fields: [categoryId], references: [id])
+  optionGroups  ProductOptionGroup[]
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+
+  @@map("products")
+}
+
+model ProductOptionGroup {
+  id        String               @id @default(cuid())
+  productId String
+  product   Product              @relation(fields: [productId], references: [id], onDelete: Cascade)
+  key       String
+  label     String
+  uiType    OptionUiType         @default(SELECT)
+  required  Boolean              @default(true)
+  sortOrder Int                  @default(0)
+  helpText  String?
+  values    ProductOptionValue[]
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+
+  @@unique([productId, key])
+  @@map("product_option_groups")
+}
+
+model ProductOptionValue {
+  id        String             @id @default(cuid())
+  groupId   String
+  group     ProductOptionGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  label     String
+  value     String
+  priceMod  Float              @default(1)
+  sortOrder Int                @default(0)
+  meta      Json?
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  @@unique([groupId, value])
+  @@map("product_option_values")
+}
+
+/** CRM / CMS: navigation menus */
+model Menu {
+  id        String     @id @default(cuid())
+  name      String
+  location  String     @default("header")
+  active    Boolean    @default(true)
+  items     MenuItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@map("menus")
+}
+
+model MenuItem {
+  id        String   @id @default(cuid())
+  menuId    String
+  menu      Menu     @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  label     String
+  href      String
+  sortOrder Int      @default(0)
+  parentId  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("menu_items")
+}
+
+/** CRM / CMS: blog / news posts */
+model Post {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  excerpt     String?
+  content     String
+  coverImage  String?
+  status      ContentStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@map("posts")
+}
+
+/** CRM / CMS: static pages */
+model Page {
+  id             String        @id @default(cuid())
+  title          String
+  slug           String        @unique
+  content        String
+  seoTitle       String?
+  seoDescription String?
+  status         ContentStatus @default(DRAFT)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@map("pages")
+}
+
+/** Shopping cart line items (per authenticated user) */
+model CartItem {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId  String?
+  productSlug String?
+  name       String
+  image      String   @default("default")
+  imageUrl   String?
+  quantity   Int      @default(1)
+  unitPrice  Float
+  size       String   @default("")
+  material   String   @default("")
+  finishing  String   @default("")
+  options    Json?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId])
+  @@map("cart_items")
+}
