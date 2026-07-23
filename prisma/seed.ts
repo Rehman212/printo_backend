@@ -70,7 +70,7 @@ async function upsertGroup(
 
 async function main() {
   const email = 'rehmanwebs@gmail.com';
-  const password = '786786786';
+  const password = '786786';
   const hashed = await bcrypt.hash(password, 12);
 
   const admin = await prisma.user.upsert({
