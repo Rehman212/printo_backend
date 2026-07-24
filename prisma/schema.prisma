@@ -24,16 +24,26 @@ enum ContentStatus {
   ARCHIVED
 }
 
+enum OrderStatus {
+  PROCESSING
+  PRINTING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
+  id        String     @id @default(cuid())
+  email     String     @unique
   password  String
   name      String
   company   String?
-  role      Role     @default(CUSTOMER)
+  role      Role       @default(CUSTOMER)
   cartItems CartItem[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  orders    Order[]
+  productReviews ProductReview[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 
   @@map("users")
 }
@@ -68,10 +78,30 @@ model Product {
   categoryId    String
   category      Category             @relation(fields: [categoryId], references: [id])
   optionGroups  ProductOptionGroup[]
+  productReviews ProductReview[]
   createdAt     DateTime             @default(now())
   updatedAt     DateTime             @updatedAt
 
   @@map("products")
+}
+
+model ProductReview {
+  id         String   @id @default(cuid())
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  rating     Int
+  title      String?
+  body       String
+  authorName String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([productId])
+  @@index([userId])
+  @@unique([productId, userId])
+  @@map("product_reviews")
 }
 
 model ProductOptionGroup {
@@ -187,4 +217,54 @@ model CartItem {
 
   @@index([userId])
   @@map("cart_items")
+}
+
+model Order {
+  id               String      @id @default(cuid())
+  orderNumber      String      @unique
+  userId           String
+  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status           OrderStatus @default(PROCESSING)
+  subtotal         Float
+  shipping         Float       @default(0)
+  tax              Float       @default(0)
+  discount         Float       @default(0)
+  total            Float
+  notes            String?
+  shippingName     String?
+  shippingEmail    String?
+  shippingAddress  String?
+  shippingCity     String?
+  shippingState    String?
+  shippingZip      String?
+  shippingMethod   String?
+  paymentMethod    String?
+  artworkFile      String?
+  items            OrderItem[]
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String  @id @default(cuid())
+  orderId     String
+  order       Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String?
+  productSlug String?
+  name        String
+  image       String  @default("default")
+  imageUrl    String?
+  quantity    Int     @default(1)
+  unitPrice   Float
+  size        String  @default("")
+  material    String  @default("")
+  finishing   String  @default("")
+  options     Json?
+
+  @@index([orderId])
+  @@map("order_items")
 }

@@ -1,0 +1,29 @@
+-- CreateTable
+CREATE TABLE "product_reviews" (
+    "id" TEXT NOT NULL,
+    "productId" TEXT NOT NULL,
+    "userId" TEXT,
+    "rating" INTEGER NOT NULL,
+    "title" TEXT,
+    "body" TEXT NOT NULL,
+    "authorName" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "product_reviews_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE INDEX "product_reviews_productId_idx" ON "product_reviews"("productId");
+
+-- CreateIndex
+CREATE INDEX "product_reviews_userId_idx" ON "product_reviews"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "product_reviews_productId_userId_key" ON "product_reviews"("productId", "userId");
+
+-- AddForeignKey
+ALTER TABLE "product_reviews" ADD CONSTRAINT "product_reviews_productId_fkey" FOREIGN KEY ("productId") REFERENCES "products"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "product_reviews" ADD CONSTRAINT "product_reviews_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { CheckoutController } from './checkout.controller';
+import { OrdersModule } from '../orders/orders.module';
 
+/** @deprecated Checkout is handled by OrdersModule (`POST /checkout`) */
 @Module({
-  controllers: [CheckoutController],
+  imports: [OrdersModule],
 })
 export class CheckoutModule {}
