@@ -33,17 +33,42 @@ enum OrderStatus {
 }
 
 model User {
-  id        String     @id @default(cuid())
-  email     String     @unique
+  id        String  @id @default(cuid())
+  email     String  @unique
   password  String
   name      String
   company   String?
-  role      Role       @default(CUSTOMER)
-  cartItems CartItem[]
-  orders    Order[]
+  role      Role    @default(CUSTOMER)
+
+  // Profile settings
+  phone       String?
+  jobTitle    String?
+  website     String?
+  industry    String?
+  employees   String?
+  address     String?
+  city        String?
+  state       String?
+  zip         String?
+  country     String?
+  timezone    String?
+  language    String?
+  currency    String?
+  avatarUrl   String?
+
+  // Communication preferences
+  notifyOrderEmail  Boolean @default(true)
+  notifySms         Boolean @default(true)
+  notifyWeeklyDigest Boolean @default(true)
+  notifyMarketing   Boolean @default(false)
+
+  passwordChangedAt DateTime?
+
+  cartItems      CartItem[]
+  orders         Order[]
   productReviews ProductReview[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@map("users")
 }
