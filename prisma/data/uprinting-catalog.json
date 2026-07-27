@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-07-23T17:38:54.756Z",
+  "collectedAt": "2026-07-27T17:55:01.390Z",
   "source": "https://www.uprinting.com",
   "note": "Curated from public UPrinting product pages (Printing Cost defaults). CDN images used when available; category photography used as fallback when CloudFront blocks scrape.",
   "categories": [
@@ -242,7 +242,7 @@
       "rating": 4.5,
       "reviews": 200,
       "galleryUrls": [
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80"
+        "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80"
       ],
       "compareAt": null,
       "active": true,
@@ -250,7 +250,7 @@
       "slug": "event-tents",
       "categorySlug": "promotional-products",
       "basePrice": 777.52,
-      "imageUrl": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80",
       "description": "10x10 custom pop-up event tents with dye-sublimated canopy and aluminum frame.",
       "featured": true,
       "badge": "Featured"
@@ -1748,6 +1748,1545 @@
       "description": "Collectible-style trading cards for promotions and fandom.",
       "featured": false,
       "badge": null
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Circle Business Cards",
+      "slug": "circle-business-cards",
+      "categorySlug": "business-cards",
+      "basePrice": 44.99,
+      "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80",
+      "description": "Round circle business cards that stand out in any networking stack."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Oval Business Cards",
+      "slug": "oval-business-cards",
+      "categorySlug": "business-cards",
+      "basePrice": 44.99,
+      "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80",
+      "description": "Elegant oval-shaped business cards with premium paper options."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Half-Circle Business Cards",
+      "slug": "half-circle-business-cards",
+      "categorySlug": "business-cards",
+      "basePrice": 46.99,
+      "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80",
+      "description": "Unique half-circle die-cut business cards for memorable branding."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Leaf Business Cards",
+      "slug": "leaf-business-cards",
+      "categorySlug": "business-cards",
+      "basePrice": 48.99,
+      "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80",
+      "description": "Leaf-shaped die-cut business cards ideal for eco and lifestyle brands."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Metallic Business Cards",
+      "slug": "metallic-business-cards",
+      "categorySlug": "business-cards",
+      "basePrice": 69.99,
+      "imageUrl": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+      "description": "Metallic finish business cards with shimmering silver or gold tones."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Raised Foil Business Cards",
+      "slug": "raised-foil-business-cards",
+      "categorySlug": "business-cards",
+      "basePrice": 89.99,
+      "imageUrl": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+      "description": "Raised foil accents for logos and text that pop off the card."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Raised Spot UV Business Cards",
+      "slug": "raised-spot-uv-business-cards",
+      "categorySlug": "business-cards",
+      "basePrice": 79.99,
+      "imageUrl": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+      "description": "Raised spot UV coating for glossy highlights on select design areas."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Square Rounded Corner Business Cards",
+      "slug": "square-rounded-corner-business-cards",
+      "categorySlug": "business-cards",
+      "basePrice": 39.99,
+      "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80",
+      "description": "Square business cards with soft rounded corners for a modern look."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Circle Flyers",
+      "slug": "circle-flyers",
+      "categorySlug": "flyers",
+      "basePrice": 34.99,
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
+      "description": "Eye-catching round flyers for promotions, menus, and events."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Oval Flyers",
+      "slug": "oval-flyers",
+      "categorySlug": "flyers",
+      "basePrice": 34.99,
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
+      "description": "Oval die-cut flyers that break away from standard rectangles."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Half Circle Flyers",
+      "slug": "half-circle-flyers",
+      "categorySlug": "flyers",
+      "basePrice": 36.99,
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
+      "description": "Half-circle flyers perfect for door hangers and unique promos."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Leaf Flyers",
+      "slug": "leaf-flyers",
+      "categorySlug": "flyers",
+      "basePrice": 36.99,
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
+      "description": "Leaf-shaped promotional flyers for seasonal and eco campaigns."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Foil Flyers",
+      "slug": "foil-flyers",
+      "categorySlug": "flyers",
+      "basePrice": 54.99,
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
+      "description": "Premium foil flyers with metallic accents for high-end promotions."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Silk Flyers",
+      "slug": "silk-flyers",
+      "categorySlug": "flyers",
+      "basePrice": 49.99,
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
+      "description": "Soft-touch silk finish flyers with a luxurious matte feel."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Metallic Flyers",
+      "slug": "metallic-flyers",
+      "categorySlug": "flyers",
+      "basePrice": 52.99,
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
+      "description": "Metallic stock flyers that shimmer under light for premium impact."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Tri-Fold Brochures",
+      "slug": "tri-fold-brochures",
+      "categorySlug": "brochures",
+      "basePrice": 54.99,
+      "imageUrl": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80",
+      "description": "Classic tri-fold brochures for product lines, menus, and services."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/957/530x530/Bulk_Booklets_Marketing_Materials_A.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Catalogs",
+      "slug": "catalogs",
+      "categorySlug": "brochures",
+      "basePrice": 199.99,
+      "imageUrl": "https://staticecp.uprinting.com/957/530x530/Bulk_Booklets_Marketing_Materials_A.jpg",
+      "description": "Multi-page product catalogs with saddle-stitch or perfect binding."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Newsletters",
+      "slug": "newsletters",
+      "categorySlug": "brochures",
+      "basePrice": 79.99,
+      "imageUrl": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80",
+      "description": "Printed newsletters for clients, members, and community updates."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/957/530x530/Bulk_Booklets_Marketing_Materials_A.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Magazines",
+      "slug": "magazines",
+      "categorySlug": "brochures",
+      "basePrice": 249.99,
+      "imageUrl": "https://staticecp.uprinting.com/957/530x530/Bulk_Booklets_Marketing_Materials_A.jpg",
+      "description": "Full-color magazines with glossy covers and professional binding.",
+      "badge": "New"
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Rack Cards",
+      "slug": "rack-cards",
+      "categorySlug": "brochures",
+      "basePrice": 29.99,
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
+      "description": "4x9 rack cards sized for brochure holders and display stands."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Leaflets",
+      "slug": "leaflets",
+      "categorySlug": "brochures",
+      "basePrice": 24.99,
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
+      "description": "Single-sheet leaflets for handouts, inserts, and event marketing."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Transfer Stickers",
+      "slug": "transfer-stickers",
+      "categorySlug": "stickers",
+      "basePrice": 39.99,
+      "imageUrl": "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg",
+      "description": "Transfer stickers and decals for walls, windows, and vehicles."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Roll Stickers",
+      "slug": "roll-stickers",
+      "categorySlug": "stickers",
+      "basePrice": 49.99,
+      "imageUrl": "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg",
+      "description": "Continuous roll stickers for packaging, sealing, and high-volume use."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Kraft Stickers",
+      "slug": "kraft-stickers",
+      "categorySlug": "stickers",
+      "basePrice": 34.99,
+      "imageUrl": "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg",
+      "description": "Natural kraft paper stickers with an eco-friendly rustic look."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Foil Stickers",
+      "slug": "foil-stickers",
+      "categorySlug": "stickers",
+      "basePrice": 54.99,
+      "imageUrl": "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg",
+      "description": "Metallic foil stickers for premium branding and packaging seals."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "QR Code Stickers",
+      "slug": "qr-code-stickers",
+      "categorySlug": "stickers",
+      "basePrice": 29.99,
+      "imageUrl": "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg",
+      "description": "Custom QR code stickers that drive traffic to menus, sites, and apps."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Safety Stickers",
+      "slug": "safety-stickers",
+      "categorySlug": "stickers",
+      "basePrice": 32.99,
+      "imageUrl": "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg",
+      "description": "Safety and warning stickers for workplaces, equipment, and facilities."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Sealing Stickers",
+      "slug": "sealing-stickers",
+      "categorySlug": "stickers",
+      "basePrice": 27.99,
+      "imageUrl": "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg",
+      "description": "Envelope and package sealing stickers for brands and bakeries."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Campaign Stickers",
+      "slug": "campaign-stickers",
+      "categorySlug": "stickers",
+      "basePrice": 39.99,
+      "imageUrl": "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg",
+      "description": "Political and campaign stickers for rallies, doors, and outreach."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Name Stickers",
+      "slug": "name-stickers",
+      "categorySlug": "stickers",
+      "basePrice": 24.99,
+      "imageUrl": "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg",
+      "description": "Personalized name stickers for kids, events, and office labeling."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Food Labels",
+      "slug": "food-labels",
+      "categorySlug": "labels",
+      "basePrice": 44.99,
+      "imageUrl": "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg",
+      "description": "Custom food product labels with waterproof and freezer-safe options."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Candle Labels",
+      "slug": "candle-labels",
+      "categorySlug": "labels",
+      "basePrice": 42.99,
+      "imageUrl": "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg",
+      "description": "Wraparound and die-cut candle jar labels for makers and brands."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Jar Labels",
+      "slug": "jar-labels",
+      "categorySlug": "labels",
+      "basePrice": 41.99,
+      "imageUrl": "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg",
+      "description": "Custom jar labels for sauces, jams, candles, and cosmetics."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Cosmetic Labels",
+      "slug": "cosmetic-labels",
+      "categorySlug": "labels",
+      "basePrice": 46.99,
+      "imageUrl": "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg",
+      "description": "Premium cosmetic and beauty product labels on waterproof stock."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Address Labels",
+      "slug": "address-labels",
+      "categorySlug": "labels",
+      "basePrice": 24.99,
+      "imageUrl": "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg",
+      "description": "Return address and mailing labels for envelopes and packages."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Warning Labels",
+      "slug": "warning-labels",
+      "categorySlug": "labels",
+      "basePrice": 29.99,
+      "imageUrl": "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg",
+      "description": "Compliance and warning labels for products and shipping."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Wine Labels",
+      "slug": "wine-labels",
+      "categorySlug": "labels",
+      "basePrice": 59.99,
+      "imageUrl": "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg",
+      "description": "Custom wine bottle labels with waterproof and foil options."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Clear Labels",
+      "slug": "clear-labels",
+      "categorySlug": "labels",
+      "basePrice": 49.99,
+      "imageUrl": "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg",
+      "description": "Transparent clear labels for a no-label look on bottles and jars."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Foil Labels",
+      "slug": "foil-labels",
+      "categorySlug": "labels",
+      "basePrice": 64.99,
+      "imageUrl": "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg",
+      "description": "Metallic foil labels that elevate packaging for premium products."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Waterproof Labels",
+      "slug": "waterproof-labels",
+      "categorySlug": "labels",
+      "basePrice": 54.99,
+      "imageUrl": "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg",
+      "description": "Durable waterproof labels for bottles, coolers, and outdoor use."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Blank Sheet Labels",
+      "slug": "blank-sheet-labels",
+      "categorySlug": "labels",
+      "basePrice": 19.99,
+      "imageUrl": "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg",
+      "description": "Blank sheet labels ready for desktop printing or custom imprint."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Label Sets",
+      "slug": "label-sets",
+      "categorySlug": "labels",
+      "basePrice": 39.99,
+      "imageUrl": "https://staticecp.uprinting.com/6904/530x530/Roll-Labels.jpg",
+      "description": "Coordinated label sets for product lines and multi-SKU packaging."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Fabric Banners",
+      "slug": "fabric-banners",
+      "categorySlug": "banners",
+      "basePrice": 49.99,
+      "imageUrl": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+      "description": "Soft fabric banners for indoor events with vibrant dye-sub print."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Table Top Banners",
+      "slug": "table-top-banners",
+      "categorySlug": "banners",
+      "basePrice": 39.99,
+      "imageUrl": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80",
+      "description": "Compact tabletop banner stands for trade shows and retail counters."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Tension Fabric Displays",
+      "slug": "tension-fabric-displays",
+      "categorySlug": "banners",
+      "basePrice": 299.99,
+      "imageUrl": "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80",
+      "description": "Tension fabric backdrop displays for booths and photo walls."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Pop Up Displays",
+      "slug": "pop-up-displays",
+      "categorySlug": "banners",
+      "basePrice": 349.99,
+      "imageUrl": "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80",
+      "description": "Portable pop-up displays that set up fast for events and expos."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Backdrops",
+      "slug": "backdrops",
+      "categorySlug": "banners",
+      "basePrice": 279.99,
+      "imageUrl": "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80",
+      "description": "Custom printed backdrops for photo booths, stages, and trade shows."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6896/530x530/Yard-Signs.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Aluminum Signs",
+      "slug": "aluminum-signs",
+      "categorySlug": "signs",
+      "basePrice": 34.99,
+      "imageUrl": "https://staticecp.uprinting.com/6896/530x530/Yard-Signs.jpg",
+      "description": "Durable aluminum signs for outdoor wayfinding and branding."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6896/530x530/Yard-Signs.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Car Magnets",
+      "slug": "car-magnets",
+      "categorySlug": "signs",
+      "basePrice": 24.99,
+      "imageUrl": "https://staticecp.uprinting.com/6896/530x530/Yard-Signs.jpg",
+      "description": "Removable car magnets for vehicle advertising on the go."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Feather Flags",
+      "slug": "feather-flags",
+      "categorySlug": "signs",
+      "basePrice": 69.99,
+      "imageUrl": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+      "description": "Tall feather flags that catch attention at storefronts and events."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Teardrop Flags",
+      "slug": "teardrop-flags",
+      "categorySlug": "signs",
+      "basePrice": 64.99,
+      "imageUrl": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+      "description": "Teardrop flag banners with portable bases for outdoor promotion."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Vinyl Lettering",
+      "slug": "vinyl-lettering",
+      "categorySlug": "signs",
+      "basePrice": 29.99,
+      "imageUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
+      "description": "Custom vinyl lettering for windows, walls, and vehicle graphics."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/5136/530x530/Window_Clings_Marketing_Materials_B.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Window Decals",
+      "slug": "window-decals",
+      "categorySlug": "signs",
+      "basePrice": 34.99,
+      "imageUrl": "https://staticecp.uprinting.com/5136/530x530/Window_Clings_Marketing_Materials_B.jpg",
+      "description": "Indoor and outdoor window decals for storefront promotions."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Acrylic Signs",
+      "slug": "acrylic-signs",
+      "categorySlug": "signs",
+      "basePrice": 59.99,
+      "imageUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
+      "description": "Modern acrylic signs for reception desks and office branding."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6896/530x530/Yard-Signs.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Real Estate Signs",
+      "slug": "real-estate-signs",
+      "categorySlug": "signs",
+      "basePrice": 39.99,
+      "imageUrl": "https://staticecp.uprinting.com/6896/530x530/Yard-Signs.jpg",
+      "description": "Coroplast and aluminum real estate yard signs with agent branding."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/6896/530x530/Yard-Signs.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Parking Signs",
+      "slug": "parking-signs",
+      "categorySlug": "signs",
+      "basePrice": 44.99,
+      "imageUrl": "https://staticecp.uprinting.com/6896/530x530/Yard-Signs.jpg",
+      "description": "Reserved parking and directional parking lot signs."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Floor Graphics",
+      "slug": "floor-graphics",
+      "categorySlug": "signs",
+      "basePrice": 49.99,
+      "imageUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
+      "description": "Durable floor graphics and stickers for retail and event wayfinding."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Tablecloths",
+      "slug": "tablecloths",
+      "categorySlug": "signs",
+      "basePrice": 89.99,
+      "imageUrl": "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80",
+      "description": "Branded tablecloths for trade show booths and event tables."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Stretch Table Covers",
+      "slug": "stretch-table-covers",
+      "categorySlug": "signs",
+      "basePrice": 99.99,
+      "imageUrl": "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80",
+      "description": "Fitted stretch table covers with full-color custom printing."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Outdoor Wall Decals",
+      "slug": "outdoor-wall-decals",
+      "categorySlug": "signs",
+      "basePrice": 79.99,
+      "imageUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
+      "description": "Weather-resistant outdoor wall decals for building exteriors.",
+      "badge": "New"
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Bubble Mailers",
+      "slug": "bubble-mailers",
+      "categorySlug": "packaging",
+      "basePrice": 34.99,
+      "imageUrl": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=80",
+      "description": "Padded bubble mailers for safe shipping of small products."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Poly Mailers",
+      "slug": "poly-mailers",
+      "categorySlug": "packaging",
+      "basePrice": 29.99,
+      "imageUrl": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=80",
+      "description": "Lightweight poly mailers with custom branding for eCommerce."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1607112812619-182cb1c7bb61?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Rigid Mailers",
+      "slug": "rigid-mailers",
+      "categorySlug": "packaging",
+      "basePrice": 39.99,
+      "imageUrl": "https://images.unsplash.com/photo-1607112812619-182cb1c7bb61?w=800&q=80",
+      "description": "Rigid mailers that protect prints, photos, and flat merchandise."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Plastic Bags",
+      "slug": "plastic-bags",
+      "categorySlug": "packaging",
+      "basePrice": 49.99,
+      "imageUrl": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=80",
+      "description": "Custom printed plastic shopping bags for retail checkout."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Tissue Paper",
+      "slug": "tissue-paper",
+      "categorySlug": "packaging",
+      "basePrice": 24.99,
+      "imageUrl": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=80",
+      "description": "Branded tissue paper for gift wrapping and unboxing experiences."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Ribbons and Bows",
+      "slug": "ribbons-and-bows",
+      "categorySlug": "packaging",
+      "basePrice": 19.99,
+      "imageUrl": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&q=80",
+      "description": "Custom ribbons and bows for gift packaging and retail displays."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1607112812619-182cb1c7bb61?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Wine Mailer Boxes",
+      "slug": "wine-mailer-boxes",
+      "categorySlug": "boxes",
+      "basePrice": 12.99,
+      "imageUrl": "https://images.unsplash.com/photo-1607112812619-182cb1c7bb61?w=800&q=80",
+      "description": "Protective wine mailer boxes sized for bottles and gift sets."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1607112812619-182cb1c7bb61?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "School Boxes",
+      "slug": "school-boxes",
+      "categorySlug": "boxes",
+      "basePrice": 9.99,
+      "imageUrl": "https://images.unsplash.com/photo-1607112812619-182cb1c7bb61?w=800&q=80",
+      "description": "Custom school and lunch boxes with durable print finishes."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Jackets",
+      "slug": "jackets",
+      "categorySlug": "apparel",
+      "basePrice": 49.99,
+      "imageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
+      "description": "Branded jackets including soft shell, fleece, and vest styles."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Sweatshirts",
+      "slug": "sweatshirts",
+      "categorySlug": "apparel",
+      "basePrice": 29.99,
+      "imageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
+      "description": "Custom crewneck sweatshirts for teams, schools, and merch drops."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Workwear",
+      "slug": "workwear",
+      "categorySlug": "apparel",
+      "basePrice": 39.99,
+      "imageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
+      "description": "Durable branded workwear for crews, trades, and uniforms."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Beanies",
+      "slug": "beanies",
+      "categorySlug": "apparel",
+      "basePrice": 12.99,
+      "imageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
+      "description": "Embroidered beanies for winter promotions and brand merch."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Pens",
+      "slug": "pens",
+      "categorySlug": "promotional-products",
+      "basePrice": 0.89,
+      "imageUrl": "https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&q=80",
+      "description": "Custom branded pens for giveaways, offices, and trade shows."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Sticky Notes",
+      "slug": "sticky-notes",
+      "categorySlug": "promotional-products",
+      "basePrice": 1.29,
+      "imageUrl": "https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&q=80",
+      "description": "Logo sticky notes that keep your brand on every desk."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Buttons",
+      "slug": "buttons",
+      "categorySlug": "promotional-products",
+      "basePrice": 0.79,
+      "imageUrl": "https://staticecp.uprinting.com/9761/530x530/UP_Square_Stickers_PDP_Image_A_wBadge.jpg",
+      "description": "Custom pinback buttons for campaigns, events, and fans."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Calendars",
+      "slug": "calendars",
+      "categorySlug": "promotional-products",
+      "basePrice": 8.99,
+      "imageUrl": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80",
+      "description": "Wall and desk calendars with full-color custom photography."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Notebooks",
+      "slug": "notebooks",
+      "categorySlug": "promotional-products",
+      "basePrice": 4.99,
+      "imageUrl": "https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&q=80",
+      "description": "Branded notebooks and journals for clients and team gifts."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Bookmarks",
+      "slug": "bookmarks",
+      "categorySlug": "marketing-materials",
+      "basePrice": 19.99,
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
+      "description": "Custom bookmarks for bookstores, libraries, and brand inserts."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Hang Tags",
+      "slug": "hang-tags",
+      "categorySlug": "marketing-materials",
+      "basePrice": 29.99,
+      "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80",
+      "description": "Product hang tags for apparel, retail, and packaged goods."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Door Hangers",
+      "slug": "door-hangers",
+      "categorySlug": "marketing-materials",
+      "basePrice": 34.99,
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
+      "description": "Door hanger flyers for local marketing and service promotions."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Magnets",
+      "slug": "magnets",
+      "categorySlug": "marketing-materials",
+      "basePrice": 39.99,
+      "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80",
+      "description": "Custom fridge magnets for restaurants, realtors, and services."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Folders",
+      "slug": "folders",
+      "categorySlug": "marketing-materials",
+      "basePrice": 89.99,
+      "imageUrl": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80",
+      "description": "Presentation folders with pockets for proposals and media kits."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Appointment Cards",
+      "slug": "appointment-cards",
+      "categorySlug": "marketing-materials",
+      "basePrice": 24.99,
+      "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80",
+      "description": "Appointment reminder cards for salons, clinics, and studios."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Invitations",
+      "slug": "invitations",
+      "categorySlug": "marketing-materials",
+      "basePrice": 49.99,
+      "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80",
+      "description": "Custom invitations for weddings, parties, and corporate events."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Event Tickets",
+      "slug": "event-tickets",
+      "categorySlug": "marketing-materials",
+      "basePrice": 39.99,
+      "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80",
+      "description": "Numbered event tickets with perforated stubs for admissions."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Thank You Cards",
+      "slug": "thank-you-cards",
+      "categorySlug": "marketing-materials",
+      "basePrice": 34.99,
+      "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80",
+      "description": "Branded thank you cards for clients, customers, and guests."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Greeting Cards",
+      "slug": "greeting-cards",
+      "categorySlug": "marketing-materials",
+      "basePrice": 44.99,
+      "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80",
+      "description": "Custom greeting cards for holidays, promotions, and personal notes."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Waterproof Menus",
+      "slug": "waterproof-menus",
+      "categorySlug": "marketing-materials",
+      "basePrice": 79.99,
+      "imageUrl": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
+      "description": "Wipeable waterproof menus built for busy restaurants and bars.",
+      "badge": "New"
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Folded Postcards",
+      "slug": "folded-postcards",
+      "categorySlug": "postcards",
+      "basePrice": 49.99,
+      "imageUrl": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80",
+      "description": "Folded postcards that open for extra messaging and offers."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Foil Postcards",
+      "slug": "foil-postcards",
+      "categorySlug": "postcards",
+      "basePrice": 69.99,
+      "imageUrl": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80",
+      "description": "Foil-stamped postcards for premium direct mail campaigns."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Die-Cut Postcards",
+      "slug": "die-cut-postcards",
+      "categorySlug": "postcards",
+      "basePrice": 59.99,
+      "imageUrl": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80",
+      "description": "Custom die-cut postcards in unique shapes that get noticed."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Silk Postcards",
+      "slug": "silk-postcards",
+      "categorySlug": "postcards",
+      "basePrice": 54.99,
+      "imageUrl": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=800&q=80",
+      "description": "Soft-touch silk postcards with a premium matte finish."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Canvas Prints",
+      "slug": "canvas-prints",
+      "categorySlug": "posters",
+      "basePrice": 39.99,
+      "imageUrl": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+      "description": "Gallery-wrapped canvas prints for photos, art, and décor."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Acrylic Prints",
+      "slug": "acrylic-prints",
+      "categorySlug": "posters",
+      "basePrice": 79.99,
+      "imageUrl": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+      "description": "Modern acrylic photo prints with a glass-like glossy finish."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Metal Prints",
+      "slug": "metal-prints",
+      "categorySlug": "posters",
+      "basePrice": 69.99,
+      "imageUrl": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+      "description": "Vibrant metal prints that are waterproof and ready to hang."
+    },
+    {
+      "deliveryDays": 3,
+      "rating": 4.5,
+      "reviews": 200,
+      "galleryUrls": [
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+      ],
+      "compareAt": null,
+      "active": true,
+      "name": "Framed Prints",
+      "slug": "framed-prints",
+      "categorySlug": "posters",
+      "basePrice": 59.99,
+      "imageUrl": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+      "description": "Custom framed prints for offices, galleries, and home décor."
     }
   ]
 }

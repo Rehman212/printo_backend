@@ -136,7 +136,7 @@ export class AdminProductsService {
           active: dto.active,
           featured: dto.featured,
           badge: dto.badge,
-          imageUrl: dto.imageUrl,
+          imageUrl: dto.imageUrl === '' ? null : dto.imageUrl,
           galleryUrls: dto.galleryUrls,
           ...(dto.options
             ? {

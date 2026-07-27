@@ -3,7 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { OrderStatus, Prisma } from '@prisma/client';
+import { OrderStatus, ProofStatus, Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CheckoutDto, CheckoutItemDto } from './dto/checkout.dto';
 
@@ -71,6 +71,7 @@ export class OrdersService {
     shippingMethod: string | null;
     paymentMethod: string | null;
     artworkFile: string | null;
+    proofStatus?: ProofStatus;
     createdAt: Date;
     updatedAt: Date;
     user: { id: string; name: string; email: string };
@@ -107,6 +108,9 @@ export class OrdersService {
       shippingMethod: order.shippingMethod,
       paymentMethod: order.paymentMethod,
       artworkFile: order.artworkFile,
+      proofStatus: order.proofStatus
+        ? String(order.proofStatus).toLowerCase()
+        : 'none',
       createdAt: order.createdAt,
       updatedAt: order.updatedAt,
       customer: {
@@ -179,6 +183,9 @@ export class OrdersService {
           shippingMethod: dto.shippingMethod,
           paymentMethod: dto.paymentMethod,
           artworkFile: dto.artworkFile,
+          proofStatus: dto.artworkFile
+            ? ProofStatus.AWAITING
+            : ProofStatus.NONE,
           items: {
             create: lines.map((i) => ({
               productId: i.productId,

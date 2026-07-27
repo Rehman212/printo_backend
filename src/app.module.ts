@@ -10,6 +10,9 @@ import { AdminProductsModule } from './admin-products/admin-products.module';
 import { CrmModule } from './crm/crm.module';
 import { CartModule } from './cart/cart.module';
 import { ReviewsModule } from './reviews/reviews.module';
+import { UploadsModule } from './uploads/uploads.module';
+import { AdminOpsModule } from './admin-ops/admin-ops.module';
+import { CustomerModule } from './customer/customer.module';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -26,8 +29,11 @@ import { HealthController } from './health.controller';
     ProductsModule,
     ReviewsModule,
     AdminProductsModule,
+    AdminOpsModule,
+    CustomerModule,
     CrmModule,
     CartModule,
+    UploadsModule,
   ],
   controllers: [HealthController],
 })

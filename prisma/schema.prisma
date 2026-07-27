@@ -32,6 +32,19 @@ enum OrderStatus {
   CANCELLED
 }
 
+enum ProofStatus {
+  NONE
+  AWAITING
+  APPROVED
+  CHANGES
+}
+
+enum QuoteStatus {
+  PENDING
+  APPROVED
+  DECLINED
+}
+
 model User {
   id        String  @id @default(cuid())
   email     String  @unique
@@ -66,6 +79,10 @@ model User {
 
   cartItems      CartItem[]
   orders         Order[]
+  quotes         Quote[]
+  wishlistItems  WishlistItem[]
+  supportTickets SupportTicket[]
+  savedDesigns   SavedDesign[]
   productReviews ProductReview[]
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
@@ -265,13 +282,36 @@ model Order {
   shippingMethod   String?
   paymentMethod    String?
   artworkFile      String?
+  proofStatus      ProofStatus @default(NONE)
   items            OrderItem[]
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
 
   @@index([userId])
   @@index([status])
+  @@index([proofStatus])
   @@map("orders")
+}
+
+model Quote {
+  id            String      @id @default(cuid())
+  quoteNumber   String      @unique
+  customerName  String
+  customerEmail String?
+  company       String?
+  productName   String
+  quantity      Int         @default(1)
+  total         Float
+  notes         String?
+  status        QuoteStatus @default(PENDING)
+  userId        String?
+  user          User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([status])
+  @@index([userId])
+  @@map("quotes")
 }
 
 model OrderItem {
@@ -293,3 +333,58 @@ model OrderItem {
   @@index([orderId])
   @@map("order_items")
 }
+
+model WishlistItem {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId   String?
+  productSlug String
+  name        String
+  imageUrl    String?
+  basePrice   Float?
+  createdAt   DateTime @default(now())
+
+  @@unique([userId, productSlug])
+  @@index([userId])
+  @@map("wishlist_items")
+}
+
+enum TicketStatus {
+  OPEN
+  PENDING
+  RESOLVED
+  CLOSED
+}
+
+model SupportTicket {
+  id        String       @id @default(cuid())
+  ticketNumber String    @unique
+  userId    String
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject   String
+  message   String
+  status    TicketStatus @default(OPEN)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@map("support_tickets")
+}
+
+model SavedDesign {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  productSlug String?
+  productName String?
+  previewUrl  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@map("saved_designs")
+}
+
