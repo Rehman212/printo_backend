@@ -1,0 +1,46 @@
+name: Deploy API to EC2
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ec2-api
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: ${{ secrets.EC2_PORT }}
+          script: |
+            set -e
+            mkdir -p ~/app/printo_backend
+            cd ~/app/printo_backend
+
+            if [ ! -d .git ]; then
+              git clone https://github.com/Rehman212/printo_backend.git .
+            fi
+
+            git fetch origin
+            git reset --hard origin/main
+            git clean -fd -e .env -e .env.local
+
+            if [ ! -f .env ]; then
+              echo "Missing ~/app/printo_backend/.env on the server"
+              exit 1
+            fi
+
+            docker compose down --remove-orphans || true
+            docker compose up -d --build
+            docker compose ps
