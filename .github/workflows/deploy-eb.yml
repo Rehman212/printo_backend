@@ -34,8 +34,15 @@ jobs:
           # Prisma generate already ran via postinstall; DATABASE_URL not needed for nest build
           DATABASE_URL: postgresql://build:build@localhost:5432/build?schema=public
 
+      # EB Node runs `npm run build` after install. Without @nestjs/cli (devDep),
+      # nest build wipes dist/ then fails → health Red. Keep CI-built dist.
+      - name: Skip rebuild on Elastic Beanstalk
+        run: |
+          node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('package.json','utf8')); p.scripts.build='echo Prebuilt in CI'; fs.writeFileSync('package.json', JSON.stringify(p,null,2)+'\n');"
+
       - name: Package for Elastic Beanstalk
         run: |
+          test -f dist/src/main.js
           zip -r deploy.zip . \
             -x "node_modules/*" \
             -x ".git/*" \
@@ -68,4 +75,4 @@ jobs:
           version_description: ${{ github.event.head_commit.message || github.event_name }}
           deployment_package: deploy.zip
           wait_for_deployment: true
-          wait_for_environment_recovery: 300
+          wait_for_environment_recovery: 180
