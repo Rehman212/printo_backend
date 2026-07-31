@@ -103,26 +103,33 @@ model Category {
 }
 
 model Product {
-  id            String               @id @default(cuid())
-  name          String
-  slug          String               @unique
-  description   String
-  basePrice     Float
-  compareAt     Float?
-  rating        Float                @default(4.5)
-  reviews       Int                  @default(0)
-  deliveryDays  Int                  @default(3)
-  badge         String?
-  imageUrl      String?
-  galleryUrls   String[]             @default([])
-  featured      Boolean              @default(false)
-  active        Boolean              @default(true)
-  categoryId    String
-  category      Category             @relation(fields: [categoryId], references: [id])
-  optionGroups  ProductOptionGroup[]
-  productReviews ProductReview[]
-  createdAt     DateTime             @default(now())
-  updatedAt     DateTime             @updatedAt
+  id               String               @id @default(cuid())
+  name             String
+  slug             String               @unique
+  description      String
+  shortDescription String?
+  seoTitle         String?
+  seoDescription   String?
+  basePrice        Float
+  compareAt        Float?
+  rating           Float                @default(4.5)
+  reviews          Int                  @default(0)
+  deliveryDays     Int                  @default(3)
+  badge            String?
+  imageUrl         String?
+  galleryUrls      String[]             @default([])
+  /** Custom FAQs: [{ question: string, answer: string }] */
+  faqs             Json?
+  /** Product switcher tabs: [{ id, label, iconUrl?, fields: [{ id, label, type, options?, helpText? }] }] */
+  productTabs      Json?
+  featured         Boolean              @default(false)
+  active           Boolean              @default(true)
+  categoryId       String
+  category         Category             @relation(fields: [categoryId], references: [id])
+  optionGroups     ProductOptionGroup[]
+  productReviews   ProductReview[]
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
 
   @@map("products")
 }

@@ -2,10 +2,12 @@ import {
   IsArray,
   IsBoolean,
   IsEnum,
+  IsIn,
   IsInt,
   IsNumber,
   IsOptional,
   IsString,
+  MaxLength,
   Min,
   MinLength,
   ValidateNested,
@@ -48,18 +50,73 @@ export class CreateOptionGroupDto {
   required?: boolean;
 
   @IsOptional()
-  @Type(() => Number)
-  @IsNumber()
-  sortOrder?: number;
-
-  @IsOptional()
   @IsString()
   helpText?: string;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  sortOrder?: number;
 
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateOptionValueDto)
   values!: CreateOptionValueDto[];
+}
+
+export class ProductFaqDto {
+  @IsString()
+  @MinLength(1)
+  question!: string;
+
+  @IsString()
+  @MinLength(1)
+  answer!: string;
+}
+
+export class ProductTabFieldDto {
+  @IsString()
+  id!: string;
+
+  @IsString()
+  @MinLength(1)
+  label!: string;
+
+  @IsIn(['select', 'text', 'number'])
+  type!: 'select' | 'text' | 'number';
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  options?: string[];
+
+  @IsOptional()
+  @IsString()
+  helpText?: string;
+}
+
+export class ProductTabDto {
+  @IsString()
+  id!: string;
+
+  @IsString()
+  @MinLength(1)
+  label!: string;
+
+  @IsOptional()
+  @IsString()
+  iconUrl?: string;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(0)
+  price?: number;
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ProductTabFieldDto)
+  fields!: ProductTabFieldDto[];
 }
 
 export class CreateProductDto {
@@ -73,6 +130,21 @@ export class CreateProductDto {
 
   @IsString()
   description!: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(200)
+  shortDescription?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(60)
+  seoTitle?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(150)
+  seoDescription?: string;
 
   @Type(() => Number)
   @IsNumber()
@@ -107,6 +179,18 @@ export class CreateProductDto {
   galleryUrls?: string[];
 
   @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ProductFaqDto)
+  faqs?: ProductFaqDto[];
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ProductTabDto)
+  productTabs?: ProductTabDto[];
+
+  @IsOptional()
   @IsBoolean()
   featured?: boolean;
 
@@ -135,6 +219,21 @@ export class UpdateProductDto {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(200)
+  shortDescription?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(60)
+  seoTitle?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(150)
+  seoDescription?: string;
 
   @IsOptional()
   @Type(() => Number)
@@ -177,6 +276,18 @@ export class UpdateProductDto {
   @IsArray()
   @IsString({ each: true })
   galleryUrls?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ProductFaqDto)
+  faqs?: ProductFaqDto[];
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ProductTabDto)
+  productTabs?: ProductTabDto[];
 
   /** If provided, replaces all option groups for the product */
   @IsOptional()

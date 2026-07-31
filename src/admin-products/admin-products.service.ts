@@ -73,6 +73,9 @@ export class AdminProductsService {
         name: dto.name,
         slug: dto.slug,
         description: dto.description,
+        shortDescription: dto.shortDescription || null,
+        seoTitle: dto.seoTitle?.trim() || null,
+        seoDescription: dto.seoDescription?.trim() || null,
         basePrice: dto.basePrice,
         categoryId: dto.categoryId,
         compareAt: dto.compareAt,
@@ -80,6 +83,12 @@ export class AdminProductsService {
         badge: dto.badge,
         imageUrl: dto.imageUrl,
         galleryUrls: dto.galleryUrls ?? [],
+        faqs: dto.faqs?.length
+          ? (dto.faqs as unknown as Prisma.InputJsonValue)
+          : undefined,
+        productTabs: dto.productTabs?.length
+          ? (dto.productTabs as unknown as Prisma.InputJsonValue)
+          : undefined,
         featured: dto.featured ?? false,
         active: dto.active ?? true,
         optionGroups: dto.options?.length
@@ -129,6 +138,18 @@ export class AdminProductsService {
           name: dto.name,
           slug: dto.slug,
           description: dto.description,
+          shortDescription:
+            dto.shortDescription === undefined
+              ? undefined
+              : dto.shortDescription || null,
+          seoTitle:
+            dto.seoTitle === undefined
+              ? undefined
+              : dto.seoTitle?.trim() || null,
+          seoDescription:
+            dto.seoDescription === undefined
+              ? undefined
+              : dto.seoDescription?.trim() || null,
           basePrice: dto.basePrice,
           categoryId: dto.categoryId,
           compareAt: dto.compareAt,
@@ -138,6 +159,14 @@ export class AdminProductsService {
           badge: dto.badge,
           imageUrl: dto.imageUrl === '' ? null : dto.imageUrl,
           galleryUrls: dto.galleryUrls,
+          faqs:
+            dto.faqs === undefined
+              ? undefined
+              : ((dto.faqs ?? []) as unknown as Prisma.InputJsonValue),
+          productTabs:
+            dto.productTabs === undefined
+              ? undefined
+              : ((dto.productTabs ?? []) as unknown as Prisma.InputJsonValue),
           ...(dto.options
             ? {
                 optionGroups: {

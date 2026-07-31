@@ -83,6 +83,9 @@ export class ProductsService {
     name: string;
     slug: string;
     description: string;
+    shortDescription?: string | null;
+    seoTitle?: string | null;
+    seoDescription?: string | null;
     basePrice: number;
     compareAt: number | null;
     rating: number;
@@ -91,6 +94,8 @@ export class ProductsService {
     badge: string | null;
     imageUrl: string | null;
     galleryUrls: string[];
+    faqs?: unknown;
+    productTabs?: unknown;
     featured: boolean;
     category: { id: string; name: string; slug: string };
     optionGroups: { id: string; key: string; label: string }[];
@@ -100,6 +105,9 @@ export class ProductsService {
       name: product.name,
       slug: product.slug,
       description: product.description,
+      shortDescription: product.shortDescription ?? null,
+      seoTitle: product.seoTitle ?? null,
+      seoDescription: product.seoDescription ?? null,
       basePrice: product.basePrice,
       compareAt: product.compareAt,
       rating: product.rating,
@@ -108,6 +116,16 @@ export class ProductsService {
       badge: product.badge,
       imageUrl: product.imageUrl,
       galleryUrls: product.galleryUrls,
+      faqs: Array.isArray(product.faqs)
+        ? (product.faqs as Array<{ question?: string; answer?: string }>).filter(
+            (f) =>
+              typeof f?.question === 'string' &&
+              typeof f?.answer === 'string' &&
+              f.question.trim() &&
+              f.answer.trim(),
+          )
+        : [],
+      productTabs: Array.isArray(product.productTabs) ? product.productTabs : [],
       featured: product.featured,
       category: product.category,
       optionGroupCount: product.optionGroups.length,
@@ -120,6 +138,9 @@ export class ProductsService {
     name: string;
     slug: string;
     description: string;
+    shortDescription?: string | null;
+    seoTitle?: string | null;
+    seoDescription?: string | null;
     basePrice: number;
     compareAt: number | null;
     rating: number;
@@ -128,6 +149,8 @@ export class ProductsService {
     badge: string | null;
     imageUrl: string | null;
     galleryUrls: string[];
+    faqs?: unknown;
+    productTabs?: unknown;
     featured: boolean;
     active?: boolean;
     category: { id: string; name: string; slug: string };
@@ -144,8 +167,8 @@ export class ProductsService {
         label: string;
         value: string;
         priceMod: number;
-        sortOrder: number;
         meta: unknown;
+        sortOrder: number;
       }>;
     }>;
   }) {
@@ -155,6 +178,9 @@ export class ProductsService {
         name: product.name,
         slug: product.slug,
         description: product.description,
+        shortDescription: product.shortDescription ?? null,
+        seoTitle: product.seoTitle ?? null,
+        seoDescription: product.seoDescription ?? null,
         basePrice: product.basePrice,
         compareAt: product.compareAt,
         rating: product.rating,
@@ -163,6 +189,16 @@ export class ProductsService {
         badge: product.badge,
         imageUrl: product.imageUrl,
         galleryUrls: product.galleryUrls,
+        faqs: Array.isArray(product.faqs)
+          ? (product.faqs as Array<{ question?: string; answer?: string }>).filter(
+              (f) =>
+                typeof f?.question === 'string' &&
+                typeof f?.answer === 'string' &&
+                f.question.trim() &&
+                f.answer.trim(),
+            )
+          : [],
+        productTabs: Array.isArray(product.productTabs) ? product.productTabs : [],
         featured: product.featured,
         active: product.active ?? true,
         category: product.category,
