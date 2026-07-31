@@ -37,8 +37,8 @@ export class OrdersController {
 
   @Get('orders/:id')
   @UseGuards(JwtAuthGuard)
-  myOrder(@Param('id') id: string) {
-    return this.ordersService.getOne(id);
+  myOrder(@CurrentUser() user: JwtPayloadUser, @Param('id') id: string) {
+    return this.ordersService.getOne(id, user.userId);
   }
 
   /** Admin: all orders */

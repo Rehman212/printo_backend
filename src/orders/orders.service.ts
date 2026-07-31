@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -34,7 +35,12 @@ export class OrdersService {
     shippingName: string | null;
     shippingEmail: string | null;
     user: { name: string; email: string };
-    items: Array<{ name: string; quantity: number }>;
+    items: Array<{
+      name: string;
+      quantity: number;
+      imageUrl?: string | null;
+      productSlug?: string | null;
+    }>;
   }) {
     const primary = order.items[0];
     const qty = order.items.reduce((s, i) => s + i.quantity, 0);
@@ -49,6 +55,8 @@ export class OrdersService {
       customer: order.shippingName || order.user.name,
       email: order.shippingEmail || order.user.email,
       itemCount: order.items.length,
+      imageUrl: primary?.imageUrl ?? null,
+      productSlug: primary?.productSlug ?? null,
     };
   }
 
@@ -292,7 +300,7 @@ export class OrdersService {
     };
   }
 
-  async getOne(idOrNumber: string) {
+  async getOne(idOrNumber: string, userId?: string) {
     const order = await this.prisma.order.findFirst({
       where: {
         OR: [{ id: idOrNumber }, { orderNumber: idOrNumber }],
@@ -303,6 +311,9 @@ export class OrdersService {
       },
     });
     if (!order) throw new NotFoundException('Order not found');
+    if (userId && order.userId !== userId) {
+      throw new ForbiddenException('You do not have access to this order');
+    }
     return { success: true, data: this.toDetail(order) };
   }
 }
