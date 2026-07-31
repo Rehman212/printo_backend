@@ -149,8 +149,8 @@ async function seedProductOptions(
 }
 
 async function main() {
-  const email = 'rehmanwebs@gmail.com';
-  const password = '786786';
+  const email = 'demouser@gmail.com';
+  const password = 'Mani123@!!';
   const hashed = await bcrypt.hash(password, 12);
 
   const admin = await prisma.user.upsert({
@@ -158,12 +158,12 @@ async function main() {
     update: {
       password: hashed,
       role: Role.ADMIN,
-      name: 'Rehman',
+      name: 'Demo Admin',
     },
     create: {
       email,
       password: hashed,
-      name: 'Rehman',
+      name: 'Demo Admin',
       company: 'Printoe',
       role: Role.ADMIN,
     },
