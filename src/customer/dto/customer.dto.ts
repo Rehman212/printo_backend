@@ -81,4 +81,9 @@ export class CreateSavedDesignDto {
   @IsOptional()
   @IsString()
   previewUrl?: string;
+
+  /** Stable options fingerprint — also stored in previewUrl as options:<key> for matching */
+  @IsOptional()
+  @IsString()
+  optionsKey?: string;
 }

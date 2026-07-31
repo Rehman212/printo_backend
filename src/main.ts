@@ -7,13 +7,19 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
+  const frontendOrigins = [
+    process.env.FRONTEND_URL,
+    'https://printoe.com',
+    'https://www.printoe.com',
+    'https://main.d32vo9xr3dxlu3.amplifyapp.com',
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:3001',
+  ].filter(Boolean) as string[];
+
   app.enableCors({
-    origin: [
-      process.env.FRONTEND_URL || 'http://localhost:3000',
-      'http://localhost:3001',
-      'http://127.0.0.1:3000',
-      'http://127.0.0.1:3001',
-    ],
+    origin: frontendOrigins,
     credentials: true,
   });
 

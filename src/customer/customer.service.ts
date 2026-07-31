@@ -252,7 +252,56 @@ export class CustomerService {
       where: { userId },
       orderBy: { createdAt: 'desc' },
     });
-    return { success: true, data: items };
+
+    const slugsNeedingProduct = items
+      .filter((i) => !i.imageUrl || i.basePrice == null || !i.productId)
+      .map((i) => i.productSlug);
+
+    const products =
+      slugsNeedingProduct.length > 0
+        ? await this.prisma.product.findMany({
+            where: { slug: { in: [...new Set(slugsNeedingProduct)] } },
+            select: {
+              id: true,
+              slug: true,
+              imageUrl: true,
+              basePrice: true,
+            },
+          })
+        : [];
+
+    const bySlug = new Map(products.map((p) => [p.slug, p]));
+
+    const data = await Promise.all(
+      items.map(async (item) => {
+        const product = bySlug.get(item.productSlug);
+        const imageUrl = item.imageUrl || product?.imageUrl || null;
+        const basePrice = item.basePrice ?? product?.basePrice ?? null;
+        const productId = item.productId || product?.id || null;
+
+        // Backfill missing fields so next load is complete
+        if (
+          product &&
+          (item.imageUrl !== imageUrl ||
+            item.basePrice !== basePrice ||
+            item.productId !== productId)
+        ) {
+          await this.prisma.wishlistItem.update({
+            where: { id: item.id },
+            data: { imageUrl, basePrice, productId },
+          });
+        }
+
+        return {
+          ...item,
+          imageUrl,
+          basePrice,
+          productId,
+        };
+      }),
+    );
+
+    return { success: true, data };
   }
 
   async addWishlist(userId: string, dto: CreateWishlistDto) {
@@ -339,20 +388,100 @@ export class CustomerService {
       where: { userId },
       orderBy: { updatedAt: 'desc' },
     });
-    return { success: true, data: designs };
+
+    // Collapse legacy duplicates (same product + same options fingerprint / productName)
+    const seen = new Set<string>();
+    const unique: typeof designs = [];
+    const removeIds: string[] = [];
+    for (const d of designs) {
+      const fingerprint = d.previewUrl?.startsWith('options:')
+        ? d.previewUrl
+        : `name:${d.productSlug ?? ''}:${d.productName ?? d.name}`;
+      const key = `${d.productSlug ?? 'custom'}::${fingerprint}`;
+      if (seen.has(key)) {
+        removeIds.push(d.id);
+        continue;
+      }
+      seen.add(key);
+      unique.push(d);
+    }
+    if (removeIds.length) {
+      await this.prisma.savedDesign.deleteMany({
+        where: { id: { in: removeIds } },
+      });
+    }
+
+    return { success: true, data: unique };
   }
 
   async createDesign(userId: string, dto: CreateSavedDesignDto) {
+    const productSlug = dto.productSlug?.trim() || null;
+    const optionsKey = (dto.optionsKey ?? '').trim();
+    const name = dto.name.trim();
+    const productName = dto.productName?.trim() || null;
+    // Store options fingerprint in previewUrl (no extra DB column required)
+    const previewUrl =
+      dto.previewUrl?.trim() ||
+      (optionsKey ? `options:${optionsKey}` : null);
+
+    if (productSlug) {
+      const candidates = await this.prisma.savedDesign.findMany({
+        where: { userId, productSlug },
+        orderBy: { updatedAt: 'desc' },
+      });
+
+      const match =
+        candidates.find((d) => {
+          if (optionsKey) {
+            return (
+              d.previewUrl === `options:${optionsKey}` ||
+              d.previewUrl === optionsKey
+            );
+          }
+          return d.productName === productName;
+        }) ?? candidates.find((d) => d.productName === productName);
+
+      if (match) {
+        const dupes = candidates.filter(
+          (d) =>
+            d.id !== match.id &&
+            (d.previewUrl === match.previewUrl ||
+              d.productName === match.productName),
+        );
+        if (dupes.length) {
+          await this.prisma.savedDesign.deleteMany({
+            where: { id: { in: dupes.map((d) => d.id) } },
+          });
+        }
+
+        const design = await this.prisma.savedDesign.update({
+          where: { id: match.id },
+          data: { name, productName, previewUrl },
+        });
+        return {
+          success: true,
+          message: 'Design already saved',
+          data: design,
+          alreadySaved: true,
+        };
+      }
+    }
+
     const design = await this.prisma.savedDesign.create({
       data: {
         userId,
-        name: dto.name.trim(),
-        productSlug: dto.productSlug,
-        productName: dto.productName,
-        previewUrl: dto.previewUrl,
+        name,
+        productSlug,
+        productName,
+        previewUrl,
       },
     });
-    return { success: true, message: 'Design saved', data: design };
+    return {
+      success: true,
+      message: 'Design saved',
+      data: design,
+      alreadySaved: false,
+    };
   }
 
   async deleteDesign(userId: string, id: string) {
