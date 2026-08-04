@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "shortDescription" TEXT;
+ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "seoTitle" TEXT;
+ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "seoDescription" TEXT;
+ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "faqs" JSONB;
+ALTER TABLE "products" ADD COLUMN IF NOT EXISTS "productTabs" JSONB;
