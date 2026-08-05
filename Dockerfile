@@ -26,6 +26,7 @@ COPY prisma ./prisma
 RUN npm ci --omit=dev && npx prisma generate
 
 COPY --from=builder /app/dist ./dist
+COPY scripts ./scripts
 
 EXPOSE 8080
 CMD ["node", "dist/src/main.js"]
