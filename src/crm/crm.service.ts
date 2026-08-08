@@ -198,6 +198,32 @@ export class CrmService {
     return { success: true, message: 'Page deleted', data: { id } };
   }
 
+  /** Public: published posts only */
+  async getPublishedPostBySlug(slug: string) {
+    const data = await this.prisma.post.findFirst({
+      where: { slug, status: ContentStatus.PUBLISHED },
+    });
+    if (!data) throw new NotFoundException('Post not found');
+    return { success: true, data };
+  }
+
+  async listPublishedPosts() {
+    const data = await this.prisma.post.findMany({
+      where: { status: ContentStatus.PUBLISHED },
+      orderBy: [{ publishedAt: 'desc' }, { updatedAt: 'desc' }],
+    });
+    return { success: true, data };
+  }
+
+  /** Public: published pages only */
+  async getPublishedPageBySlug(slug: string) {
+    const data = await this.prisma.page.findFirst({
+      where: { slug, status: ContentStatus.PUBLISHED },
+    });
+    if (!data) throw new NotFoundException('Page not found');
+    return { success: true, data };
+  }
+
   private async ensureUniqueSlug(kind: 'post' | 'page', slug: string) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
       throw new BadRequestException(

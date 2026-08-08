@@ -245,6 +245,54 @@ model Page {
   @@map("pages")
 }
 
+/** Singleton store / site settings (id is always "default") */
+model SiteSettings {
+  id                   String   @id @default("default")
+  storeName            String   @default("Printoe")
+  tagline              String   @default("Enterprise print, perfected.")
+  description          String   @default("Custom business cards, packaging, banners, and more — print that looks as good as it sells.")
+  logoUrl              String?
+  faviconUrl           String?
+  primaryColor         String   @default("#e6007a")
+  supportEmail         String   @default("hello@printoe.com")
+  supportPhone         String   @default("+1 (888) 555-0199")
+  address              String   @default("450 Market Street, Suite 1200, San Francisco, CA 94105")
+  businessHours        String   @default("Mon–Fri 9am–6pm PT")
+  websiteUrl           String   @default("https://printoe.com")
+  seoTitleTemplate     String   @default("%s | Printoe")
+  seoDefaultDescription String  @default("Custom printing for business cards, packaging, banners, apparel, and more.")
+  seoOgImageUrl        String?
+  googleAnalyticsId    String?
+  googleSearchConsole  String?
+  googleTagManagerId   String?
+  metaPixelId          String?
+  headerHtml           String?  @db.Text
+  bodyHtml             String?  @db.Text
+  currency             String   @default("USD")
+  currencySymbol       String   @default("$")
+  timezone             String   @default("America/Los_Angeles")
+  taxNote              String?
+  shippingNote         String?
+  minOrderAmount       Float    @default(0)
+  emailOnOrders        Boolean  @default(true)
+  emailOnQuotes        Boolean  @default(true)
+  emailOnProofs        Boolean  @default(true)
+  adminNotifyEmails    String?
+  requireProof         Boolean  @default(true)
+  allowGuestCheckout   Boolean  @default(false)
+  socialInstagram      String?
+  socialFacebook       String?
+  socialLinkedin       String?
+  socialTwitter        String?
+  socialYoutube        String?
+  maintenanceMode      Boolean  @default(false)
+  maintenanceMessage   String   @default("We're upgrading our systems. Please check back shortly.")
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
 /** Shopping cart line items (per authenticated user) */
 model CartItem {
   id         String   @id @default(cuid())

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="560" fill="url(#bg2)"/>
+  <rect x="48" y="48" width="804" height="464" rx="28" fill="#00AEEF"/>
+  <rect x="72" y="72" width="756" height="416" rx="20" fill="#ffffff"/>
+  <text x="450" y="230" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="44" font-weight="700">Approved Artwork</text>
+  <text x="450" y="280" text-anchor="middle" fill="#64748b" font-family="Arial, sans-serif" font-size="22">Order PR-11873 · demo proof sample</text>
+  <rect x="360" y="320" width="180" height="44" rx="12" fill="#16a34a"/>
+  <text x="450" y="348" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="18" font-weight="700">APPROVED</text>
+</svg>

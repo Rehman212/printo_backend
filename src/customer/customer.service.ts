@@ -9,6 +9,7 @@ import {
   TicketStatus,
 } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { SettingsService } from '../settings/settings.service';
 import {
   CreateCustomerQuoteDto,
   CreateSavedDesignDto,
@@ -18,7 +19,10 @@ import {
 
 @Injectable()
 export class CustomerService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly settings: SettingsService,
+  ) {}
 
   async overview(userId: string) {
     const [orders, quotes, wishlistCount, designsCount, ticketsOpen] =
@@ -144,6 +148,12 @@ export class CustomerService {
         status: QuoteStatus.PENDING,
       },
     });
+
+    await this.settings.notifyAdmins(
+      'quote',
+      `New quote ${quote.quoteNumber}`,
+      `${quote.customerName} · ${quote.productName} · qty ${quote.quantity}`,
+    );
 
     return {
       success: true,

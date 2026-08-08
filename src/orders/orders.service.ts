@@ -6,11 +6,15 @@ import {
 } from '@nestjs/common';
 import { OrderStatus, ProofStatus, Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { SettingsService } from '../settings/settings.service';
 import { CheckoutDto, CheckoutItemDto } from './dto/checkout.dto';
 
 @Injectable()
 export class OrdersService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly settings: SettingsService,
+  ) {}
 
   private generateOrderNumber() {
     const n = Math.floor(10000 + Math.random() * 90000);
@@ -153,6 +157,13 @@ export class OrdersService {
       throw new BadRequestException('No items to checkout');
     }
 
+    const site = await this.settings.getOrCreate();
+    if (site.requireProof && !dto.artworkFile?.trim()) {
+      throw new BadRequestException(
+        'Artwork proof PDF is required before placing this order.',
+      );
+    }
+
     const subtotal =
       dto.subtotal ??
       lines.reduce((s, i) => s + i.unitPrice * i.quantity, 0);
@@ -160,6 +171,12 @@ export class OrdersService {
     const tax = dto.tax ?? 0;
     const discount = dto.discount ?? 0;
     const total = dto.total;
+
+    if (site.minOrderAmount > 0 && total < site.minOrderAmount) {
+      throw new BadRequestException(
+        `Minimum order amount is ${site.currencySymbol}${site.minOrderAmount.toFixed(2)}.`,
+      );
+    }
 
     let orderNumber = this.generateOrderNumber();
     for (let attempt = 0; attempt < 5; attempt++) {
@@ -221,6 +238,20 @@ export class OrdersService {
 
       return created;
     });
+
+    await this.settings.notifyAdmins(
+      'order',
+      `New order ${order.orderNumber}`,
+      `Total ${order.total} · ${order.items.length} item(s) · ${order.shippingEmail || order.user.email}`,
+    );
+
+    if (order.artworkFile || order.proofStatus !== ProofStatus.NONE) {
+      await this.settings.notifyAdmins(
+        'proof',
+        `Artwork proof awaiting for ${order.orderNumber}`,
+        order.artworkFile || 'Proof status awaiting review',
+      );
+    }
 
     return {
       success: true,

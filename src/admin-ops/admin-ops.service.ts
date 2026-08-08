@@ -6,11 +6,15 @@ import {
   Role,
 } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { SettingsService } from '../settings/settings.service';
 import { CreateQuoteDto } from './dto/admin-ops.dto';
 
 @Injectable()
 export class AdminOpsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly settings: SettingsService,
+  ) {}
 
   async stats() {
     const [
@@ -113,11 +117,40 @@ export class AdminOpsService {
           orderId: o.orderNumber,
           customer: o.shippingName || o.user.name,
           email: o.shippingEmail || o.user.email,
-          fileName: o.artworkFile || 'artwork-upload',
+          fileName: this.displayArtworkName(o.artworkFile),
+          fileUrl: this.resolveArtworkUrl(o.artworkFile),
           status: this.mapProofStatus(o.proofStatus),
           submitted: o.createdAt.toISOString().slice(0, 10),
         })),
     };
+  }
+
+  private resolveArtworkUrl(artworkFile: string | null): string | null {
+    if (!artworkFile?.trim()) return null;
+    const value = artworkFile.trim();
+    if (/^https?:\/\//i.test(value)) return value;
+    if (value.startsWith('/uploads/') || value.startsWith('/api/files/')) {
+      return value;
+    }
+    // Bare legacy filenames are not real URLs — no preview until re-uploaded
+    return null;
+  }
+
+  private displayArtworkName(artworkFile: string | null): string {
+    if (!artworkFile?.trim()) return 'artwork-upload';
+    const value = artworkFile.trim();
+    try {
+      if (/^https?:\/\//i.test(value)) {
+        const path = new URL(value).pathname;
+        return decodeURIComponent(path.split('/').pop() || value);
+      }
+    } catch {
+      /* ignore */
+    }
+    if (value.includes('/')) {
+      return decodeURIComponent(value.split('/').pop() || value);
+    }
+    return value;
   }
 
   async updateProofStatus(orderKey: string, status: ProofStatus) {
@@ -139,7 +172,8 @@ export class AdminOpsService {
         orderId: updated.orderNumber,
         customer: updated.shippingName || updated.user.name,
         email: updated.shippingEmail || updated.user.email,
-        fileName: updated.artworkFile || 'artwork-upload',
+        fileName: this.displayArtworkName(updated.artworkFile),
+        fileUrl: this.resolveArtworkUrl(updated.artworkFile),
         status: this.mapProofStatus(updated.proofStatus),
         submitted: updated.createdAt.toISOString().slice(0, 10),
       },
@@ -170,6 +204,11 @@ export class AdminOpsService {
         notes: dto.notes?.trim() || null,
       },
     });
+    await this.settings.notifyAdmins(
+      'quote',
+      `New quote ${quote.quoteNumber}`,
+      `${quote.customerName} · ${quote.productName} · qty ${quote.quantity}`,
+    );
     return {
       success: true,
       message: 'Quote created',

@@ -13,6 +13,7 @@ import { ReviewsModule } from './reviews/reviews.module';
 import { UploadsModule } from './uploads/uploads.module';
 import { AdminOpsModule } from './admin-ops/admin-ops.module';
 import { CustomerModule } from './customer/customer.module';
+import { SettingsModule } from './settings/settings.module';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -34,6 +35,7 @@ import { HealthController } from './health.controller';
     CrmModule,
     CartModule,
     UploadsModule,
+    SettingsModule,
   ],
   controllers: [HealthController],
 })
