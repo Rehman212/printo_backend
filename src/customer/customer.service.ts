@@ -171,6 +171,9 @@ export class CustomerService {
           { proofStatus: { not: ProofStatus.NONE } },
         ],
       },
+      include: {
+        items: { take: 1, select: { name: true } },
+      },
       orderBy: { updatedAt: 'desc' },
     });
 
@@ -180,6 +183,7 @@ export class CustomerService {
         id: o.id,
         orderId: o.orderNumber,
         fileName: o.artworkFile || 'artwork',
+        productName: o.items[0]?.name ?? null,
         proofStatus: String(o.proofStatus).toLowerCase(),
         status: String(o.status).toLowerCase(),
         date: o.updatedAt.toISOString().slice(0, 10),
@@ -193,6 +197,9 @@ export class CustomerService {
         userId,
         status: { not: OrderStatus.CANCELLED },
       },
+      include: {
+        items: true,
+      },
       orderBy: { createdAt: 'desc' },
     });
 
@@ -203,10 +210,28 @@ export class CustomerService {
         orderId: o.orderNumber,
         date: o.createdAt.toISOString().slice(0, 10),
         amount: o.total,
+        subtotal: o.subtotal,
+        shipping: o.shipping,
+        tax: o.tax,
+        discount: o.discount,
         status:
           o.status === OrderStatus.DELIVERED || o.status === OrderStatus.SHIPPED
             ? 'paid'
             : 'pending',
+        paymentMethod: o.paymentMethod,
+        shippingName: o.shippingName,
+        shippingEmail: o.shippingEmail,
+        shippingAddress: o.shippingAddress,
+        shippingCity: o.shippingCity,
+        shippingState: o.shippingState,
+        shippingZip: o.shippingZip,
+        shippingMethod: o.shippingMethod,
+        items: o.items.map((it) => ({
+          name: it.name,
+          quantity: it.quantity,
+          unitPrice: it.unitPrice,
+          size: it.size,
+        })),
       })),
     };
   }
