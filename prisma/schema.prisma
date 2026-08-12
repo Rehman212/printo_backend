@@ -127,11 +127,34 @@ model Product {
   categoryId       String
   category         Category             @relation(fields: [categoryId], references: [id])
   optionGroups     ProductOptionGroup[]
+  variationPrices ProductVariationPrice[]
+  pricingMatrixEnabled Boolean          @default(false)
+  pricingSourceUrl String?
+  pricingImportedAt DateTime?
   productReviews   ProductReview[]
   createdAt        DateTime             @default(now())
   updatedAt        DateTime             @updatedAt
 
   @@map("products")
+}
+
+model ProductVariationPrice {
+  id             BigInt   @id @default(autoincrement())
+  productId      String
+  product        Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  selectionKey   String
+  selection      Json
+  price          Float
+  unitPrice      Float
+  quantity       Int
+  turnaroundDays Int?
+  inStock        Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([productId, selectionKey])
+  @@index([productId])
+  @@map("product_variation_prices")
 }
 
 model ProductReview {

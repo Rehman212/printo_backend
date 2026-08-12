@@ -16,6 +16,14 @@ import {
   CreateCategoryDto,
   UpdateCategoryDto,
 } from './dto/admin-category.dto';
+import { VariationPriceRowDto } from './dto/pricing-matrix.dto';
+
+function selectionKey(selection: Record<string, string>) {
+  return Object.keys(selection)
+    .sort()
+    .map((key) => `${key}=${selection[key]}`)
+    .join('&');
+}
 
 const detailInclude = {
   category: true,
@@ -216,6 +224,60 @@ export class AdminProductsService {
     });
 
     return { success: true, data: group };
+  }
+
+  async beginPricingMatrix(productId: string, sourceUrl?: string) {
+    await this.requireProduct(productId);
+    await this.prisma.$transaction([
+      this.prisma.productVariationPrice.deleteMany({ where: { productId } }),
+      this.prisma.product.update({
+        where: { id: productId },
+        data: {
+          pricingMatrixEnabled: false,
+          pricingSourceUrl: sourceUrl?.trim() || null,
+          pricingImportedAt: null,
+        },
+      }),
+    ]);
+    return { success: true, data: { importedRows: 0 } };
+  }
+
+  async importPricingChunk(productId: string, rows: VariationPriceRowDto[]) {
+    await this.requireProduct(productId);
+    if (!rows.length) return { success: true, data: { importedRows: 0 } };
+    const normalized = rows.map((row) => ({
+      productId,
+      selectionKey: selectionKey(row.selection),
+      selection: row.selection as Prisma.InputJsonValue,
+      price: row.price,
+      unitPrice: row.unitPrice,
+      quantity: row.quantity,
+      turnaroundDays: row.turnaroundDays ?? null,
+      inStock: row.inStock ?? true,
+    }));
+    const result = await this.prisma.productVariationPrice.createMany({
+      data: normalized,
+      skipDuplicates: true,
+    });
+    return { success: true, data: { importedRows: result.count } };
+  }
+
+  async completePricingMatrix(productId: string, expectedRows: number) {
+    await this.requireProduct(productId);
+    const importedRows = await this.prisma.productVariationPrice.count({ where: { productId } });
+    if (importedRows !== expectedRows) {
+      throw new BadRequestException(`Pricing import incomplete: expected ${expectedRows}, stored ${importedRows}`);
+    }
+    await this.prisma.product.update({
+      where: { id: productId },
+      data: { pricingMatrixEnabled: importedRows > 0, pricingImportedAt: new Date() },
+    });
+    return { success: true, data: { importedRows, enabled: importedRows > 0 } };
+  }
+
+  private async requireProduct(id: string) {
+    const product = await this.prisma.product.findUnique({ where: { id }, select: { id: true } });
+    if (!product) throw new NotFoundException('Product not found');
   }
 
   async listCategories() {

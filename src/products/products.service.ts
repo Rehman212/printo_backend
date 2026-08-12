@@ -78,6 +78,52 @@ export class ProductsService {
     };
   }
 
+  async findVariationPrice(slug: string, selections: Record<string, string>) {
+    const product = await this.prisma.product.findUnique({
+      where: { slug },
+      select: { id: true, active: true, pricingMatrixEnabled: true },
+    });
+    if (!product?.active) throw new NotFoundException('Product not found');
+    if (!product.pricingMatrixEnabled) {
+      return { success: true, data: null };
+    }
+    const normalized = Object.fromEntries(
+      Object.entries(selections)
+        .filter(([key, value]) => key && typeof value === 'string' && value)
+        .map(([key, value]) => [key, value]),
+    );
+    const selectionKey = Object.keys(normalized)
+      .sort()
+      .map((key) => `${key}=${normalized[key]}`)
+      .join('&');
+    const [row, matrixRows] = await Promise.all([
+      this.prisma.productVariationPrice.findUnique({
+        where: { productId_selectionKey: { productId: product.id, selectionKey } },
+        select: { price: true, unitPrice: true, quantity: true, turnaroundDays: true, inStock: true },
+      }),
+      this.prisma.productVariationPrice.findMany({
+        where: { productId: product.id, inStock: true },
+        select: { selection: true },
+      }),
+    ]);
+    const keys = [...new Set(matrixRows.flatMap((item) => Object.keys(item.selection as Record<string, string>)))]
+      .sort((a, b) => Number(a.replace(/^attr/, '')) - Number(b.replace(/^attr/, '')));
+    const availableOptions = Object.fromEntries(keys.map((targetKey) => {
+      const targetIndex = keys.indexOf(targetKey);
+      const parentKeys = new Set(keys.slice(0, targetIndex));
+      const values = new Set<string>();
+      for (const item of matrixRows) {
+        const candidate = item.selection as Record<string, string>;
+        const matchesParentFields = Object.entries(normalized).every(
+          ([key, value]) => !parentKeys.has(key) || candidate[key] === value,
+        );
+        if (matchesParentFields && candidate[targetKey]) values.add(candidate[targetKey]);
+      }
+      return [targetKey, [...values]];
+    }));
+    return { success: true, data: { ...(row ?? {}), availableOptions } };
+  }
+
   private toListItem(product: {
     id: string;
     name: string;
@@ -127,6 +173,7 @@ export class ProductsService {
         : [],
       productTabs: Array.isArray(product.productTabs) ? product.productTabs : [],
       featured: product.featured,
+      pricingMatrixEnabled: 'pricingMatrixEnabled' in product && Boolean(product.pricingMatrixEnabled),
       category: product.category,
       optionGroupCount: product.optionGroups.length,
       optionGroups: product.optionGroups,
@@ -152,6 +199,7 @@ export class ProductsService {
     faqs?: unknown;
     productTabs?: unknown;
     featured: boolean;
+    pricingMatrixEnabled?: boolean;
     active?: boolean;
     category: { id: string; name: string; slug: string };
     optionGroups: Array<{
@@ -200,6 +248,7 @@ export class ProductsService {
           : [],
         productTabs: Array.isArray(product.productTabs) ? product.productTabs : [],
         featured: product.featured,
+        pricingMatrixEnabled: product.pricingMatrixEnabled ?? false,
         active: product.active ?? true,
         category: product.category,
       },

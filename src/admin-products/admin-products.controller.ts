@@ -17,6 +17,11 @@ import {
   CreateProductDto,
   UpdateProductDto,
 } from './dto/admin-product.dto';
+import {
+  BeginPricingMatrixDto,
+  CompletePricingMatrixDto,
+  VariationPriceChunkDto,
+} from './dto/pricing-matrix.dto';
 
 @Controller('admin/products')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -60,5 +65,20 @@ export class AdminProductsController {
     @Body() dto: CreateOptionGroupDto,
   ) {
     return this.adminProductsService.addOptionGroup(id, dto);
+  }
+
+  @Post(':id/pricing-matrix/begin')
+  beginPricingMatrix(@Param('id') id: string, @Body() dto: BeginPricingMatrixDto) {
+    return this.adminProductsService.beginPricingMatrix(id, dto.sourceUrl);
+  }
+
+  @Post(':id/pricing-matrix/chunk')
+  importPricingChunk(@Param('id') id: string, @Body() dto: VariationPriceChunkDto) {
+    return this.adminProductsService.importPricingChunk(id, dto.rows);
+  }
+
+  @Post(':id/pricing-matrix/complete')
+  completePricingMatrix(@Param('id') id: string, @Body() dto: CompletePricingMatrixDto) {
+    return this.adminProductsService.completePricingMatrix(id, dto.expectedRows);
   }
 }

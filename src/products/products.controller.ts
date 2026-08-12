@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ProductsService } from './products.service';
 
 @Controller('products')
@@ -21,5 +21,13 @@ export class ProductsController {
   @Get(':slug')
   findBySlug(@Param('slug') slug: string) {
     return this.productsService.findBySlug(slug);
+  }
+
+  @Post(':slug/price')
+  findVariationPrice(
+    @Param('slug') slug: string,
+    @Body() body: { selections?: Record<string, string> },
+  ) {
+    return this.productsService.findVariationPrice(slug, body.selections ?? {});
   }
 }
