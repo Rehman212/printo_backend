@@ -7,6 +7,8 @@ import {
   Patch,
   Post,
   UseGuards,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { AdminProductsService } from './admin-products.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
@@ -22,6 +24,7 @@ import {
   CompletePricingMatrixDto,
   VariationPriceChunkDto,
 } from './dto/pricing-matrix.dto';
+import { ImportScrapeDto } from './dto/import-scrape.dto';
 
 @Controller('admin/products')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -47,6 +50,14 @@ export class AdminProductsController {
   @Post()
   create(@Body() dto: CreateProductDto) {
     return this.adminProductsService.create(dto);
+  }
+
+  // The scraper export format evolves independently of this backend - don't
+  // 400 on a field it adds later that we simply don't read yet.
+  @Post('import-scrape')
+  @UsePipes(new ValidationPipe({ whitelist: false, forbidNonWhitelisted: false, transform: true }))
+  importScrape(@Body() dto: ImportScrapeDto) {
+    return this.adminProductsService.importScrape(dto);
   }
 
   @Patch(':id')

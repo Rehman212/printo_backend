@@ -81,7 +81,12 @@ export class ProductsService {
   async findVariationPrice(slug: string, selections: Record<string, string>) {
     const product = await this.prisma.product.findUnique({
       where: { slug },
-      select: { id: true, active: true, pricingMatrixEnabled: true },
+      select: {
+        id: true,
+        active: true,
+        pricingMatrixEnabled: true,
+        pricingSourceUrl: true,
+      },
     });
     if (!product?.active) throw new NotFoundException('Product not found');
     if (!product.pricingMatrixEnabled) {
@@ -121,6 +126,57 @@ export class ProductsService {
       }
       return [targetKey, [...values]];
     }));
+    if (product.pricingSourceUrl) {
+      try {
+        const previewBase = (
+          process.env.SCRAPER_PREVIEW_URL ?? 'http://127.0.0.1:8877'
+        ).replace(/\/$/, '');
+        const response = await fetch(`${previewBase}/api/live-price`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            source_url: product.pricingSourceUrl,
+            selection: normalized,
+          }),
+          signal: AbortSignal.timeout(45_000),
+        });
+        if (response.ok) {
+          const live = (await response.json()) as {
+            price?: number | string;
+            unit_price?: number | string;
+            quantity?: number | string;
+            turnaround_days?: number | string | null;
+          };
+          const price = Number(live.price);
+          const unitPrice = Number(live.unit_price);
+          const quantity = Number(live.quantity);
+          if (
+            Number.isFinite(price) &&
+            Number.isFinite(unitPrice) &&
+            Number.isFinite(quantity)
+          ) {
+            return {
+              success: true,
+              data: {
+                price,
+                unitPrice,
+                quantity,
+                turnaroundDays:
+                  live.turnaround_days == null
+                    ? null
+                    : Number(live.turnaround_days),
+                inStock: true,
+                availableOptions,
+                pricingMode: 'live',
+              },
+            };
+          }
+        }
+      } catch {
+        // A stored exact row remains a safe offline fallback. If none exists,
+        // the storefront's unit-delta fallback handles the temporary outage.
+      }
+    }
     return { success: true, data: { ...(row ?? {}), availableOptions } };
   }
 
@@ -139,6 +195,7 @@ export class ProductsService {
     deliveryDays: number;
     badge: string | null;
     imageUrl: string | null;
+    videoUrl?: string | null;
     galleryUrls: string[];
     faqs?: unknown;
     productTabs?: unknown;
@@ -161,6 +218,7 @@ export class ProductsService {
       deliveryDays: product.deliveryDays,
       badge: product.badge,
       imageUrl: product.imageUrl,
+      videoUrl: product.videoUrl ?? null,
       galleryUrls: product.galleryUrls,
       faqs: Array.isArray(product.faqs)
         ? (product.faqs as Array<{ question?: string; answer?: string }>).filter(
@@ -195,6 +253,7 @@ export class ProductsService {
     deliveryDays: number;
     badge: string | null;
     imageUrl: string | null;
+    videoUrl?: string | null;
     galleryUrls: string[];
     faqs?: unknown;
     productTabs?: unknown;
@@ -210,6 +269,7 @@ export class ProductsService {
       required: boolean;
       sortOrder: number;
       helpText: string | null;
+      meta?: unknown;
       values: Array<{
         id: string;
         label: string;
@@ -236,6 +296,7 @@ export class ProductsService {
         deliveryDays: product.deliveryDays,
         badge: product.badge,
         imageUrl: product.imageUrl,
+        videoUrl: product.videoUrl ?? null,
         galleryUrls: product.galleryUrls,
         faqs: Array.isArray(product.faqs)
           ? (product.faqs as Array<{ question?: string; answer?: string }>).filter(
@@ -260,6 +321,7 @@ export class ProductsService {
         required: g.required,
         sortOrder: g.sortOrder,
         helpText: g.helpText,
+        meta: g.meta ?? null,
         values: g.values.map((v) => ({
           id: v.id,
           label: v.label,

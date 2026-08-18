@@ -117,6 +117,7 @@ model Product {
   deliveryDays     Int                  @default(3)
   badge            String?
   imageUrl         String?
+  videoUrl         String?
   galleryUrls      String[]             @default([])
   /** Custom FAQs: [{ question: string, answer: string }] */
   faqs             Json?
@@ -186,6 +187,7 @@ model ProductOptionGroup {
   required  Boolean              @default(true)
   sortOrder Int                  @default(0)
   helpText  String?
+  meta      Json?
   values    ProductOptionValue[]
   createdAt DateTime             @default(now())
   updatedAt DateTime             @updatedAt

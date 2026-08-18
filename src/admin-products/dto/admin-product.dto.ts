@@ -58,6 +58,9 @@ export class CreateOptionGroupDto {
   @IsInt()
   sortOrder?: number;
 
+  @IsOptional()
+  meta?: Record<string, unknown>;
+
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateOptionValueDto)
@@ -174,6 +177,10 @@ export class CreateProductDto {
   imageUrl?: string;
 
   @IsOptional()
+  @IsString()
+  videoUrl?: string;
+
+  @IsOptional()
   @IsArray()
   @IsString({ each: true })
   galleryUrls?: string[];
@@ -271,6 +278,10 @@ export class UpdateProductDto {
   @IsOptional()
   @IsString()
   imageUrl?: string;
+
+  @IsOptional()
+  @IsString()
+  videoUrl?: string;
 
   @IsOptional()
   @IsArray()
