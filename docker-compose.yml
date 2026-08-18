@@ -5,8 +5,22 @@ services:
     restart: always
     env_file:
       - .env
+    environment:
+      SCRAPER_PREVIEW_URL: http://scraper:8877
     expose:
       - "8080"
+    depends_on:
+      - scraper
+
+  scraper:
+    build:
+      context: ../scraperpython
+    container_name: printoe-pricing
+    restart: always
+    environment:
+      PRICING_SERVICE_ONLY: "1"
+    expose:
+      - "8877"
 
   caddy:
     image: caddy:2

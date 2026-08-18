@@ -41,6 +41,17 @@ jobs:
               exit 1
             fi
 
+            cd ~/app
+            if [ ! -d scraperpython/.git ]; then
+              rm -rf scraperpython
+              git clone https://github.com/Rehman212/scraperpython.git scraperpython
+            fi
+            cd scraperpython
+            git fetch origin
+            git reset --hard origin/main
+            git clean -fd
+
+            cd ~/app/printo_backend
             docker compose down --remove-orphans || true
             docker compose up -d --build
             docker compose ps
