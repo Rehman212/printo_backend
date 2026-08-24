@@ -37,6 +37,14 @@ const detailInclude = {
   },
 };
 
+function sanitizeImportedHtml(html: string) {
+  return html
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/@charset[^;]+;/gi, '')
+    .trim();
+}
+
 @Injectable()
 export class AdminProductsService {
   constructor(
@@ -638,7 +646,9 @@ export class AdminProductsService {
     const importedName =
       String((metadata as Record<string, unknown>).productName ?? (metadata as Record<string, unknown>).product_name ?? '').trim() ||
       'Untitled Product';
-    const importedDescription = typeof dto.description === 'string' ? dto.description.trim() : '';
+    const importedDescription = sanitizeImportedHtml(
+      typeof dto.description === 'string' ? dto.description : '',
+    );
     const importedImage = typeof dto.product_image === 'string' ? dto.product_image.trim() : undefined;
     const importedGallery = Array.isArray(dto.images)
       ? [...new Set(dto.images.map((url) => String(url).trim()).filter(Boolean))]

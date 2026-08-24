@@ -13,9 +13,25 @@ const productInclude = {
   },
 };
 
+const PRODUCT_SLUG_ALIASES: Record<string, string> = {
+  'address-labels': 'address-labels-return-address-labels',
+  'return-address-labels': 'address-labels-return-address-labels',
+};
+
 @Injectable()
 export class ProductsService {
   constructor(private readonly prisma: PrismaService) {}
+
+  private async productBySlug<T>(
+    slug: string,
+    query: (resolved: string) => Promise<T | null>,
+  ) {
+    const resolved = PRODUCT_SLUG_ALIASES[slug] ?? slug;
+    const match = await query(resolved);
+    if (match) return match;
+    if (resolved === slug) return null;
+    return query(slug);
+  }
 
   async findAll(category?: string, featuredOnly = false) {
     const products = await this.prisma.product.findMany({
@@ -63,10 +79,12 @@ export class ProductsService {
   }
 
   async findBySlug(slug: string) {
-    const product = await this.prisma.product.findUnique({
-      where: { slug },
-      include: productInclude,
-    });
+    const product = await this.productBySlug(slug, (resolved) =>
+      this.prisma.product.findUnique({
+        where: { slug: resolved },
+        include: productInclude,
+      }),
+    );
 
     if (!product || !product.active) {
       throw new NotFoundException('Product not found');
@@ -79,15 +97,17 @@ export class ProductsService {
   }
 
   async findVariationPrice(slug: string, selections: Record<string, string>) {
-    const product = await this.prisma.product.findUnique({
-      where: { slug },
-      select: {
-        id: true,
-        active: true,
-        pricingMatrixEnabled: true,
-        pricingSourceUrl: true,
-      },
-    });
+    const product = await this.productBySlug(slug, (resolved) =>
+      this.prisma.product.findUnique({
+        where: { slug: resolved },
+        select: {
+          id: true,
+          active: true,
+          pricingMatrixEnabled: true,
+          pricingSourceUrl: true,
+        },
+      }),
+    );
     if (!product?.active) throw new NotFoundException('Product not found');
     if (!product.pricingMatrixEnabled) {
       return { success: true, data: null };

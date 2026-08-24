@@ -55,3 +55,7 @@ jobs:
             docker compose down --remove-orphans || true
             docker compose up -d --build
             docker compose ps
+
+            # Product-specific content/rules for Address Labels + Book Shipping Boxes
+            docker compose exec -T api node scripts/fix-address-labels.mjs
+            docker compose exec -T api node scripts/fix-book-shipping-boxes.mjs
