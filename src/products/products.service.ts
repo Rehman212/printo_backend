@@ -342,14 +342,22 @@ export class ProductsService {
         sortOrder: g.sortOrder,
         helpText: g.helpText,
         meta: g.meta ?? null,
-        values: g.values.map((v) => ({
-          id: v.id,
-          label: v.label,
-          value: v.value,
-          priceMod: v.priceMod,
-          sortOrder: v.sortOrder,
-          meta: v.meta,
-        })),
+        values: g.values
+          .filter((v) => {
+            const meta =
+              v.meta && typeof v.meta === 'object' && !Array.isArray(v.meta)
+                ? (v.meta as Record<string, unknown>)
+                : null;
+            return !meta?.uiHidden;
+          })
+          .map((v) => ({
+            id: v.id,
+            label: v.label,
+            value: v.value,
+            priceMod: v.priceMod,
+            sortOrder: v.sortOrder,
+            meta: v.meta,
+          })),
       })),
     };
   }

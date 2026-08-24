@@ -56,6 +56,7 @@ jobs:
             docker compose up -d --build
             docker compose ps
 
-            # Product-specific content/rules for Address Labels + Book Shipping Boxes
+            # Product-specific content/rules (scoped per product)
             docker compose exec -T api node scripts/fix-address-labels.mjs
             docker compose exec -T api node scripts/fix-book-shipping-boxes.mjs
+            docker compose exec -T api node scripts/fix-bumper-stickers.mjs
