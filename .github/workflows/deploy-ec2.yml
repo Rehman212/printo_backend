@@ -60,3 +60,5 @@ jobs:
             docker compose exec -T api node scripts/fix-address-labels.mjs
             docker compose exec -T api node scripts/fix-book-shipping-boxes.mjs
             docker compose exec -T api node scripts/fix-bumper-stickers.mjs
+            docker compose exec -T api node scripts/fix-custom-metallic-labels.mjs
+            docker compose exec -T api node scripts/fix-boat-lettering-images.mjs
