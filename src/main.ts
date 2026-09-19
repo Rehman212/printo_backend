@@ -18,16 +18,23 @@ async function bootstrap() {
     process.env.FRONTEND_URL,
     'https://printoe.com',
     'https://www.printoe.com',
+    'https://editor.printoe.com',
     'https://main.d32vo9xr3dxlu3.amplifyapp.com',
+    'https://main.dcxv58mlk9l5m.amplifyapp.com',
     'http://localhost:3000',
     'http://localhost:3001',
+    'http://localhost:3002',
+    'http://localhost:3003',
     'http://127.0.0.1:3000',
     'http://127.0.0.1:3001',
+    'http://127.0.0.1:3002',
+    'http://127.0.0.1:3003',
   ].filter(Boolean) as string[];
 
   app.enableCors({
     origin: frontendOrigins,
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   });
 
   app.useGlobalPipes(

@@ -95,6 +95,11 @@ export class CustomerController {
     return this.customerService.listDesigns(user.userId);
   }
 
+  @Get('designs/:id')
+  getDesign(@CurrentUser() user: JwtPayloadUser, @Param('id') id: string) {
+    return this.customerService.getDesign(user.userId, id);
+  }
+
   @Post('designs')
   createDesign(
     @CurrentUser() user: JwtPayloadUser,

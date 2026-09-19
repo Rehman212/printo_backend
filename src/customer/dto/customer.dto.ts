@@ -86,4 +86,8 @@ export class CreateSavedDesignDto {
   @IsOptional()
   @IsString()
   optionsKey?: string;
+
+  @IsOptional()
+  @IsString()
+  canvasJson?: string;
 }

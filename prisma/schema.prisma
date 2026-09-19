@@ -461,6 +461,7 @@ model SavedDesign {
   productSlug String?
   productName String?
   previewUrl  String?
+  canvasJson  String? @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

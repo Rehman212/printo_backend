@@ -422,6 +422,15 @@ export class CustomerService {
     const designs = await this.prisma.savedDesign.findMany({
       where: { userId },
       orderBy: { updatedAt: 'desc' },
+      select: {
+        id: true,
+        name: true,
+        productSlug: true,
+        productName: true,
+        previewUrl: true,
+        createdAt: true,
+        updatedAt: true,
+      },
     });
 
     // Collapse legacy duplicates (same product + same options fingerprint / productName)
@@ -491,7 +500,12 @@ export class CustomerService {
 
         const design = await this.prisma.savedDesign.update({
           where: { id: match.id },
-          data: { name, productName, previewUrl },
+          data: {
+            name,
+            productName,
+            previewUrl,
+            ...(dto.canvasJson != null ? { canvasJson: dto.canvasJson } : {}),
+          },
         });
         return {
           success: true,
@@ -509,6 +523,7 @@ export class CustomerService {
         productSlug,
         productName,
         previewUrl,
+        canvasJson: dto.canvasJson ?? null,
       },
     });
     return {
@@ -517,6 +532,14 @@ export class CustomerService {
       data: design,
       alreadySaved: false,
     };
+  }
+
+  async getDesign(userId: string, id: string) {
+    const design = await this.prisma.savedDesign.findFirst({
+      where: { id, userId },
+    });
+    if (!design) throw new NotFoundException('Design not found');
+    return { success: true, data: design };
   }
 
   async deleteDesign(userId: string, id: string) {
