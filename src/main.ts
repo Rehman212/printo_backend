@@ -1,12 +1,26 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { json, urlencoded } from 'express';
+import helmet from 'helmet';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const http = app.getHttpAdapter().getInstance();
+  http.set('trust proxy', 1);
+  http.disable('x-powered-by');
 
   app.setGlobalPrefix('api');
+
+  app.use(
+    helmet({
+      contentSecurityPolicy: false,
+      crossOriginEmbedderPolicy: false,
+      crossOriginResourcePolicy: { policy: 'cross-origin' },
+      referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+      hsts: { maxAge: 31536000, includeSubDomains: true, preload: false },
+    }),
+  );
 
   // Default Express body limit (100kb) is too small for scraped product
   // imports - a full pricing sweep JSON (attributes + every price row) can
@@ -34,7 +48,9 @@ async function bootstrap() {
   app.enableCors({
     origin: frontendOrigins,
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    maxAge: 86400,
   });
 
   app.useGlobalPipes(
