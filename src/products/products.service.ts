@@ -1,5 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import {
+  customSizeFactor,
+  customSizeUnit,
+  isCustomSizePilot,
+  resolveBaseSizeInches,
+  toInches,
+} from './custom-size';
 
 const productInclude = {
   category: true,
@@ -96,7 +103,11 @@ export class ProductsService {
     };
   }
 
-  async findVariationPrice(slug: string, selections: Record<string, string>) {
+  async findVariationPrice(
+    slug: string,
+    selections: Record<string, string>,
+    customSize?: { width?: number; height?: number },
+  ) {
     const product = await this.productBySlug(slug, (resolved) =>
       this.prisma.product.findUnique({
         where: { slug: resolved },
@@ -177,7 +188,7 @@ export class ProductsService {
           ) {
             return {
               success: true,
-              data: {
+              data: await this.applyCustomSizeScale(slug, product.id, normalized, customSize, {
                 price,
                 unitPrice,
                 quantity,
@@ -188,7 +199,7 @@ export class ProductsService {
                 inStock: true,
                 availableOptions,
                 pricingMode: 'live',
-              },
+              }),
             };
           }
         }
@@ -197,7 +208,48 @@ export class ProductsService {
         // the storefront's unit-delta fallback handles the temporary outage.
       }
     }
-    return { success: true, data: { ...(row ?? {}), availableOptions } };
+    return {
+      success: true,
+      data: await this.applyCustomSizeScale(slug, product.id, normalized, customSize, {
+        ...(row ?? {}),
+        availableOptions,
+      }),
+    };
+  }
+
+  private async applyCustomSizeScale(
+    slug: string,
+    productId: string,
+    selections: Record<string, string>,
+    customSize: { width?: number; height?: number } | undefined,
+    data: Record<string, unknown>,
+  ) {
+    const width = Number(customSize?.width);
+    const height = Number(customSize?.height);
+    if (!isCustomSizePilot(slug) || !(width > 0) || !(height > 0)) return data;
+    const price = Number(data.price);
+    const unitPrice = Number(data.unitPrice);
+    if (!Number.isFinite(price) || !Number.isFinite(unitPrice)) return data;
+
+    const groups = await this.prisma.productOptionGroup.findMany({
+      where: { productId },
+      select: {
+        key: true,
+        label: true,
+        values: { select: { value: true, label: true } },
+      },
+    });
+    const base = resolveBaseSizeInches(slug, groups, selections);
+    if (!base) return data;
+    const custom = toInches(width, height, customSizeUnit(slug));
+    const factor = customSizeFactor(base, custom);
+    if (!factor) return data;
+    return {
+      ...data,
+      price: Math.round(price * factor * 100) / 100,
+      unitPrice: Math.round(unitPrice * factor * 10000) / 10000,
+      customSizeApplied: true,
+    };
   }
 
   private toListItem(product: {

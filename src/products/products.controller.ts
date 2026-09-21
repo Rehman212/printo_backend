@@ -26,8 +26,16 @@ export class ProductsController {
   @Post(':slug/price')
   findVariationPrice(
     @Param('slug') slug: string,
-    @Body() body: { selections?: Record<string, string> },
+    @Body()
+    body: {
+      selections?: Record<string, string>;
+      customWidth?: number;
+      customHeight?: number;
+    },
   ) {
-    return this.productsService.findVariationPrice(slug, body.selections ?? {});
+    return this.productsService.findVariationPrice(slug, body.selections ?? {}, {
+      width: body.customWidth,
+      height: body.customHeight,
+    });
   }
 }
