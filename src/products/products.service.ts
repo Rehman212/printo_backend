@@ -23,6 +23,7 @@ const productInclude = {
 const PRODUCT_SLUG_ALIASES: Record<string, string> = {
   'address-labels': 'address-labels-return-address-labels',
   'return-address-labels': 'address-labels-return-address-labels',
+  'lip-balm-labels-2': 'lip-balm-labels',
 };
 
 @Injectable()
@@ -36,8 +37,24 @@ export class ProductsService {
     const resolved = PRODUCT_SLUG_ALIASES[slug] ?? slug;
     const match = await query(resolved);
     if (match) return match;
-    if (resolved === slug) return null;
-    return query(slug);
+    if (resolved !== slug) {
+      const original = await query(slug);
+      if (original) return original;
+    }
+    const publishedTwin = await this.prisma.product.findFirst({
+      where: {
+        active: true,
+        OR: [
+          { slug: slug.replace(/-2$/, '') },
+          { slug: { startsWith: `${slug.replace(/-2$/, '')}` } },
+        ],
+      },
+      select: { slug: true, name: true },
+    });
+    if (publishedTwin && publishedTwin.slug !== slug && publishedTwin.slug !== resolved) {
+      return query(publishedTwin.slug);
+    }
+    return null;
   }
 
   async findAll(category?: string, featuredOnly = false) {

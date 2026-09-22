@@ -49,7 +49,7 @@ export class ImportScrapeDto {
     attribute_id?: string;
     attributeId?: string;
     name: string;
-    /** "buttons" marks the synthesized linked-calculator type switcher (see preview_server.py) - renders as CARDS, not a dropdown. */
+    /** "buttons" = CARDS tiles (linked calc switcher + box-list Shape icons). */
     field_type?: string;
     defaults_by_product?: Record<string, string>;
     hide_rules_by_product?: Record<string, Array<Record<string, string>>>;
@@ -58,6 +58,8 @@ export class ImportScrapeDto {
       optionId?: string;
       label: string;
       default?: boolean;
+      /** Storefront tile image URL (e.g. Circle.svg for Shape). */
+      icon?: string;
       available_product_ids?: string[];
       exclusion_rules_by_product?: Record<string, Array<Record<string, string>>>;
     }>;

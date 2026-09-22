@@ -443,10 +443,8 @@ export class AdminProductsService {
       return [{
         key: `attr${attributeId}`,
         label: attribute.name,
-        // "buttons" only ever marks the synthesized linked-calculator type
-        // switcher (attribute_id "0", see preview_server.py's LINKED_CALCULATOR
-        // block) - render it as tiles like ProductDetail.tsx's own
-        // product-type switcher, not a plain dropdown.
+        // "buttons" = icon tiles: linked-calculator type switcher (attr0) and
+        // storefront box-list attrs like Shape on Lip Balm Labels.
         uiType: attribute.field_type === 'buttons' ? OptionUiType.CARDS : OptionUiType.SELECT,
         required: true,
         helpText: '',
@@ -486,6 +484,9 @@ export class AdminProductsService {
                         .filter(Boolean),
                     ),
                   ];
+            const iconUrl = String(
+              (option as { icon?: string }).icon ?? '',
+            ).trim();
             return {
               label: option.label,
               value: optionId,
@@ -497,6 +498,7 @@ export class AdminProductsService {
                 exclusionRulesByProduct: normalizeRulesByProduct(
                   option.exclusion_rules_by_product,
                 ),
+                ...(iconUrl ? { image: iconUrl } : {}),
               } as Record<string, unknown>,
             };
           }),

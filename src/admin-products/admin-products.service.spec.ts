@@ -196,6 +196,41 @@ describe('AdminProductsService.importScrape', () => {
     expect(result.import).toMatchObject({ status: 'draft', pricingRows: 3, refreshed: false });
   });
 
+  it('stores scrape option icon URLs on card value meta.image', async () => {
+    const { service, tx } = setup();
+    await service.importScrape(scrape({
+      attributes: [
+        {
+          attribute_id: '10',
+          name: 'Shape',
+          field_type: 'buttons',
+          defaults_by_product: { '28020': '1338603' },
+          options: [
+            {
+              option_id: '1338603',
+              label: 'Circle',
+              default: true,
+              icon: 'https://staticecp.uprinting.com/6750/Circle.svg',
+              available_product_ids: ['28020'],
+            },
+          ],
+        },
+      ],
+      prices: [{
+        selection: { attr10: '1338603' },
+        price: 192.1,
+        unit_price: 0.77,
+        quantity: 250,
+      }],
+      default_selection: { attr10: '1338603' },
+    }) as never);
+
+    const createData = tx.product.create.mock.calls[0][0].data;
+    expect(createData.optionGroups.create[0].uiType).toBe('CARDS');
+    expect(createData.optionGroups.create[0].values.create[0].meta.image)
+      .toBe('https://staticecp.uprinting.com/6750/Circle.svg');
+  });
+
   it('refreshes a matching draft without creating a duplicate', async () => {
     const { service, tx } = setup({ id: 'draft-1', slug: 'example-cards' });
     const result = await service.importScrape(scrape() as never);
