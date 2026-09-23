@@ -271,6 +271,11 @@ export class UpdateProductDto {
   @IsBoolean()
   featured?: boolean;
 
+  /** UPrinting PDP URL used for live price via the local scraper preview. */
+  @IsOptional()
+  @IsString()
+  pricingSourceUrl?: string | null;
+
   @IsOptional()
   @IsString()
   badge?: string;

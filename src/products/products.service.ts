@@ -179,12 +179,17 @@ export class ProductsService {
         const previewBase = (
           process.env.SCRAPER_PREVIEW_URL ?? 'http://127.0.0.1:8877'
         ).replace(/\/$/, '');
+        const liveSelection = await this.selectionForLivePrice(
+          product.id,
+          normalized,
+          customSize,
+        );
         const response = await fetch(`${previewBase}/api/live-price`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             source_url: product.pricingSourceUrl,
-            selection: normalized,
+            selection: liveSelection,
           }),
           signal: AbortSignal.timeout(45_000),
         });
@@ -203,20 +208,32 @@ export class ProductsService {
             Number.isFinite(unitPrice) &&
             Number.isFinite(quantity)
           ) {
+            // Live UPrinting already priced the custom W×H — do not area-scale again.
+            const usedNativeCustom =
+              Boolean(liveSelection.attrwidth) && Boolean(liveSelection.attrheight);
+            const payload = {
+              price,
+              unitPrice,
+              quantity,
+              turnaroundDays:
+                live.turnaround_days == null
+                  ? null
+                  : Number(live.turnaround_days),
+              inStock: true,
+              availableOptions,
+              pricingMode: 'live' as const,
+            };
             return {
               success: true,
-              data: await this.applyCustomSizeScale(slug, product.id, normalized, customSize, {
-                price,
-                unitPrice,
-                quantity,
-                turnaroundDays:
-                  live.turnaround_days == null
-                    ? null
-                    : Number(live.turnaround_days),
-                inStock: true,
-                availableOptions,
-                pricingMode: 'live',
-              }),
+              data: usedNativeCustom
+                ? payload
+                : await this.applyCustomSizeScale(
+                    slug,
+                    product.id,
+                    normalized,
+                    customSize,
+                    payload,
+                  ),
             };
           }
         }
@@ -232,6 +249,44 @@ export class ProductsService {
         availableOptions,
       }),
     };
+  }
+
+  /** Map Printoe custom W×H onto UPrinting attr3=Custom + attrwidth/attrheight. */
+  private async selectionForLivePrice(
+    productId: string,
+    selection: Record<string, string>,
+    customSize?: { width?: number; height?: number },
+  ) {
+    const width = Number(customSize?.width);
+    const height = Number(customSize?.height);
+    if (!(width > 0) || !(height > 0)) return selection;
+
+    const groups = await this.prisma.productOptionGroup.findMany({
+      where: { productId },
+      select: {
+        key: true,
+        label: true,
+        values: { select: { value: true, label: true } },
+      },
+    });
+    const sizeGroup = groups.find(
+      (group) =>
+        /page\s*size|^(size|dimensions?)$/i.test(group.label) ||
+        group.key === 'attr3',
+    );
+    const customOption = sizeGroup?.values.find((value) =>
+      /^custom\b/i.test(String(value.label || '').trim()),
+    );
+    const next: Record<string, string> = { ...selection };
+    if (sizeGroup) {
+      // UPrinting dynamic-size calculators use option_id "custom".
+      next[sizeGroup.key] = customOption?.value || 'custom';
+    } else if (!next.attr3) {
+      next.attr3 = 'custom';
+    }
+    next.attrwidth = String(width);
+    next.attrheight = String(height);
+    return next;
   }
 
   private async applyCustomSizeScale(

@@ -175,6 +175,10 @@ export class AdminProductsService {
           deliveryDays: dto.deliveryDays,
           active: dto.active,
           featured: dto.featured,
+          pricingSourceUrl:
+            dto.pricingSourceUrl === undefined
+              ? undefined
+              : dto.pricingSourceUrl?.trim() || null,
           badge: dto.badge,
           imageUrl: dto.imageUrl === '' ? null : dto.imageUrl,
           videoUrl: dto.videoUrl === '' ? null : dto.videoUrl,
@@ -424,7 +428,11 @@ export class AdminProductsService {
       const usableOptions = attribute.options.filter(
         (option) => {
           const id = String(option.option_id ?? option.optionId ?? '');
-          return id !== '' && id !== 'custom' && String(option.label ?? '').trim() !== '';
+          const label = String(option.label ?? '').trim();
+          if (!id || !label) return false;
+          // UPrinting dynamic-size "Custom" uses option_id "custom".
+          if (id === 'custom' && !/^custom\b/i.test(label)) return false;
+          return true;
         },
       );
       // Some scraped attributes (dynamic-size sentinels like "Width
