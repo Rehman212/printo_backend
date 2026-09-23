@@ -453,6 +453,7 @@ export class AdminProductsService {
         label: attribute.name,
         // "buttons" = icon tiles: linked-calculator type switcher (attr0) and
         // storefront box-list attrs like Shape on Lip Balm Labels.
+        // "r" = Production Time radios on UPrinting box PDPs.
         uiType: attribute.field_type === 'buttons' ? OptionUiType.CARDS : OptionUiType.SELECT,
         required: true,
         helpText: '',
@@ -465,6 +466,7 @@ export class AdminProductsService {
           hideRulesByProduct: normalizeRulesByProduct(
             attribute.hide_rules_by_product,
           ),
+          ...(attribute.field_type === 'r' ? { presentation: 'radio' } : {}),
         },
         values: usableOptions
           .map((option) => {
