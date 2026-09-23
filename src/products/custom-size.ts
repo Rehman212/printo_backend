@@ -9,7 +9,6 @@ export const CUSTOM_SIZE_PILOT_SLUGS = [
   "event-tickets",
   "plastic-business-cards",
   "standard-business-cards-3",
-  "magazines",
   "dine-in-menus",
   "waterproof-menus",
   "custom-tissue-paper",
