@@ -29,13 +29,14 @@ export class ProductsController {
     @Body()
     body: {
       selections?: Record<string, string>;
+      customSize?: { width?: number; height?: number };
       customWidth?: number;
       customHeight?: number;
     },
   ) {
     return this.productsService.findVariationPrice(slug, body.selections ?? {}, {
-      width: body.customWidth,
-      height: body.customHeight,
+      width: body.customSize?.width ?? body.customWidth,
+      height: body.customSize?.height ?? body.customHeight,
     });
   }
 }
