@@ -64,4 +64,5 @@ jobs:
             docker compose exec -T api node scripts/fix-boat-lettering-images.mjs
             docker compose exec -T api node scripts/fix-custom-tissue-paper.mjs
             docker compose exec -T api node scripts/fix-lip-balm-labels.mjs
+            docker compose exec -T api node scripts/fix-magazines-custom-size.mjs
             docker compose exec -T -e TISSUE_PRICE_API=http://127.0.0.1:8080/api/products/custom-tissue-paper/price api node scripts/seed-custom-tissue-blank-prices.mjs
