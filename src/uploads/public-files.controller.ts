@@ -76,7 +76,9 @@ export class PublicFilesController {
 
     const apiOrigin = (
       process.env.API_PUBLIC_URL ||
-      `http://localhost:${process.env.PORT || 4000}`
+      (process.env.NODE_ENV === 'production'
+        ? 'https://api.printoe.com'
+        : `http://localhost:${process.env.PORT || 4000}`)
     ).replace(/\/$/, '');
     const url = `${apiOrigin}/api/files/artwork/${encodeURIComponent(filename)}`;
 

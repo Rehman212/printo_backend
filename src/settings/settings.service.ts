@@ -11,13 +11,67 @@ export class SettingsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getOrCreate() {
-    const existing = await this.prisma.siteSettings.findUnique({
-      where: { id: DEFAULT_ID },
-    });
-    if (existing) return existing;
-    return this.prisma.siteSettings.create({
-      data: { id: DEFAULT_ID },
-    });
+    try {
+      const existing = await this.prisma.siteSettings.findUnique({
+        where: { id: DEFAULT_ID },
+      });
+      if (existing) return existing;
+      return await this.prisma.siteSettings.create({
+        data: { id: DEFAULT_ID },
+      });
+    } catch (error) {
+      this.logger.error(
+        `site_settings unavailable; using safe defaults (${error instanceof Error ? error.message : String(error)})`,
+      );
+      // Keep checkout / public settings alive if DB schema drifts mid-deploy.
+      return {
+        id: DEFAULT_ID,
+        storeName: 'Printoe',
+        tagline: 'Enterprise print, perfected.',
+        description:
+          'Custom business cards, packaging, banners, and more — print that looks as good as it sells.',
+        logoUrl: null,
+        faviconUrl: null,
+        primaryColor: '#e6007a',
+        supportEmail: 'hello@printoe.com',
+        supportPhone: '+1 (888) 555-0199',
+        address: '450 Market Street, Suite 1200, San Francisco, CA 94105',
+        businessHours: 'Mon–Fri 9am–6pm PT',
+        websiteUrl: 'https://printoe.com',
+        seoTitleTemplate: '%s | Printoe',
+        seoDefaultDescription:
+          'Custom printing for business cards, packaging, banners, apparel, and more.',
+        seoOgImageUrl: null,
+        googleAnalyticsId: null,
+        googleSearchConsole: null,
+        googleTagManagerId: null,
+        metaPixelId: null,
+        headerHtml: null,
+        bodyHtml: null,
+        currency: 'USD',
+        currencySymbol: '$',
+        timezone: 'America/Los_Angeles',
+        taxNote: null,
+        shippingNote: null,
+        minOrderAmount: 0,
+        emailOnOrders: true,
+        emailOnQuotes: true,
+        emailOnProofs: true,
+        adminNotifyEmails: null,
+        requireProof: false,
+        allowGuestCheckout: false,
+        socialInstagram: null,
+        socialFacebook: null,
+        socialLinkedin: null,
+        socialTwitter: null,
+        socialYoutube: null,
+        maintenanceMode: false,
+        maintenanceMessage:
+          "We're upgrading our systems. Please check back shortly.",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+    }
   }
 
   async getPublic() {

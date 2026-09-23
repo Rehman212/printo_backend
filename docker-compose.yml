@@ -7,6 +7,7 @@ services:
       - .env
     environment:
       SCRAPER_PREVIEW_URL: http://scraper:8877
+      API_PUBLIC_URL: ${API_PUBLIC_URL:-https://api.printoe.com}
     expose:
       - "8080"
     depends_on:
