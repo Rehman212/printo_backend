@@ -210,7 +210,8 @@ export class ProductsService {
           ) {
             // Live UPrinting already priced the custom W×H — do not area-scale again.
             const usedNativeCustom =
-              Boolean(liveSelection.attrwidth) && Boolean(liveSelection.attrheight);
+              (Boolean(liveSelection.attrwidth) || Boolean(liveSelection.attr247)) &&
+              (Boolean(liveSelection.attrheight) || Boolean(liveSelection.attr248));
             const payload = {
               price,
               unitPrice,
@@ -251,7 +252,7 @@ export class ProductsService {
     };
   }
 
-  /** Map Printoe custom W×H onto UPrinting attr3=Custom + attrwidth/attrheight. */
+  /** Map Printoe custom W×H onto UPrinting Custom Size dimension attrs. */
   private async selectionForLivePrice(
     productId: string,
     selection: Record<string, string>,
@@ -279,13 +280,37 @@ export class ProductsService {
     );
     const next: Record<string, string> = { ...selection };
     if (sizeGroup) {
-      // UPrinting dynamic-size calculators use option_id "custom".
+      // UPrinting dynamic-size calculators use option_id "custom" or a
+      // storefront "Custom Size" row (e.g. Outdoor Wall Decals 1775974).
       next[sizeGroup.key] = customOption?.value || 'custom';
     } else if (!next.attr3) {
       next.attr3 = 'custom';
     }
-    next.attrwidth = String(width);
-    next.attrheight = String(height);
+
+    const widthKeys = new Set<string>(['attrwidth']);
+    const heightKeys = new Set<string>(['attrheight']);
+    for (const group of groups) {
+      if (/^width\b/i.test(group.label) || /width/i.test(group.key)) {
+        widthKeys.add(group.key);
+      }
+      if (/^height\b/i.test(group.label) || /height/i.test(group.key)) {
+        heightKeys.add(group.key);
+      }
+    }
+    // Outdoor Wall Decals / DTF-style free-size attrs (numeric ids).
+    for (const key of Object.keys(selection)) {
+      if (/^attr247$/i.test(key) || /width/i.test(key)) widthKeys.add(key);
+      if (/^attr248$/i.test(key) || /height/i.test(key)) heightKeys.add(key);
+    }
+    // Always include the common numeric free-size pair — live scraper ignores
+    // unknown keys, and attrwidth alone underprices Outdoor Wall Decals.
+    widthKeys.add('attr247');
+    heightKeys.add('attr248');
+
+    const widthText = String(width);
+    const heightText = String(height);
+    for (const key of widthKeys) next[key] = widthText;
+    for (const key of heightKeys) next[key] = heightText;
     return next;
   }
 
