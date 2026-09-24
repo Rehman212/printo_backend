@@ -279,8 +279,8 @@ model SiteSettings {
   logoUrl              String?
   faviconUrl           String?
   primaryColor         String   @default("#e6007a")
-  supportEmail         String   @default("hello@printoe.com")
-  supportPhone         String   @default("+1 (888) 555-0199")
+  supportEmail         String   @default("printoeteam@gmail.com")
+  supportPhone         String   @default("+1 (251) 280-5283")
   address              String   @default("450 Market Street, Suite 1200, San Francisco, CA 94105")
   businessHours        String   @default("Mon–Fri 9am–6pm PT")
   websiteUrl           String   @default("https://printoe.com")
