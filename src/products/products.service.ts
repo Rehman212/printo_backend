@@ -149,31 +149,71 @@ export class ProductsService {
       .sort()
       .map((key) => `${key}=${normalized[key]}`)
       .join('&');
-    const [row, matrixRows] = await Promise.all([
-      this.prisma.productVariationPrice.findUnique({
-        where: { productId_selectionKey: { productId: product.id, selectionKey } },
-        select: { price: true, unitPrice: true, quantity: true, turnaroundDays: true, inStock: true },
+    const matrixRows = await this.prisma.productVariationPrice.findMany({
+      where: { productId: product.id, inStock: true },
+      select: {
+        selection: true,
+        selectionKey: true,
+        price: true,
+        unitPrice: true,
+        quantity: true,
+        turnaroundDays: true,
+        inStock: true,
+      },
+    });
+    // Exact key first; then ignore extra UI-only attrs (linked pouch fields,
+    // etc.) that are not part of the stored matrix selectionKey.
+    const exactRow = matrixRows.find((item) => item.selectionKey === selectionKey);
+    const partialMatches = exactRow
+      ? []
+      : matrixRows.filter((item) => {
+          const candidate = item.selection as Record<string, string>;
+          return Object.entries(candidate).every(
+            ([key, value]) => normalized[key] === value,
+          );
+        });
+    partialMatches.sort(
+      (a, b) =>
+        Object.keys(b.selection as object).length -
+        Object.keys(a.selection as object).length,
+    );
+    const matched = exactRow ?? partialMatches[0] ?? null;
+    const row = matched
+      ? {
+          price: matched.price,
+          unitPrice: matched.unitPrice,
+          quantity: matched.quantity,
+          turnaroundDays: matched.turnaroundDays,
+          inStock: matched.inStock,
+        }
+      : null;
+    const keys = [
+      ...new Set(
+        matrixRows.flatMap((item) =>
+          Object.keys(item.selection as Record<string, string>),
+        ),
+      ),
+    ].sort(
+      (a, b) =>
+        Number(a.replace(/^attr/, '')) - Number(b.replace(/^attr/, '')),
+    );
+    const availableOptions = Object.fromEntries(
+      keys.map((targetKey) => {
+        const targetIndex = keys.indexOf(targetKey);
+        const parentKeys = new Set(keys.slice(0, targetIndex));
+        const values = new Set<string>();
+        for (const item of matrixRows) {
+          const candidate = item.selection as Record<string, string>;
+          const matchesParentFields = Object.entries(normalized).every(
+            ([key, value]) => !parentKeys.has(key) || candidate[key] === value,
+          );
+          if (matchesParentFields && candidate[targetKey]) {
+            values.add(candidate[targetKey]);
+          }
+        }
+        return [targetKey, [...values]];
       }),
-      this.prisma.productVariationPrice.findMany({
-        where: { productId: product.id, inStock: true },
-        select: { selection: true },
-      }),
-    ]);
-    const keys = [...new Set(matrixRows.flatMap((item) => Object.keys(item.selection as Record<string, string>)))]
-      .sort((a, b) => Number(a.replace(/^attr/, '')) - Number(b.replace(/^attr/, '')));
-    const availableOptions = Object.fromEntries(keys.map((targetKey) => {
-      const targetIndex = keys.indexOf(targetKey);
-      const parentKeys = new Set(keys.slice(0, targetIndex));
-      const values = new Set<string>();
-      for (const item of matrixRows) {
-        const candidate = item.selection as Record<string, string>;
-        const matchesParentFields = Object.entries(normalized).every(
-          ([key, value]) => !parentKeys.has(key) || candidate[key] === value,
-        );
-        if (matchesParentFields && candidate[targetKey]) values.add(candidate[targetKey]);
-      }
-      return [targetKey, [...values]];
-    }));
+    );
     if (product.pricingSourceUrl) {
       try {
         const previewBase = (
@@ -248,6 +288,9 @@ export class ProductsService {
       data: await this.applyCustomSizeScale(slug, product.id, normalized, customSize, {
         ...(row ?? {}),
         availableOptions,
+        ...(row && typeof row.price === 'number'
+          ? { pricingMode: 'matrix' as const }
+          : {}),
       }),
     };
   }
