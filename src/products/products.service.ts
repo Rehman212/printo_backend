@@ -197,19 +197,32 @@ export class ProductsService {
       (a, b) =>
         Number(a.replace(/^attr/, '')) - Number(b.replace(/^attr/, '')),
     );
+    const matrixValuesByKey = new Map<string, Set<string>>();
+    for (const item of matrixRows) {
+      const candidate = item.selection as Record<string, string>;
+      for (const [key, value] of Object.entries(candidate)) {
+        const bucket = matrixValuesByKey.get(key) ?? new Set<string>();
+        bucket.add(value);
+        matrixValuesByKey.set(key, bucket);
+      }
+    }
     const availableOptions = Object.fromEntries(
       keys.map((targetKey) => {
-        const targetIndex = keys.indexOf(targetKey);
-        const parentKeys = new Set(keys.slice(0, targetIndex));
         const values = new Set<string>();
         for (const item of matrixRows) {
           const candidate = item.selection as Record<string, string>;
-          const matchesParentFields = Object.entries(normalized).every(
-            ([key, value]) => !parentKeys.has(key) || candidate[key] === value,
-          );
-          if (matchesParentFields && candidate[targetKey]) {
-            values.add(candidate[targetKey]);
-          }
+          if (!candidate[targetKey]) continue;
+          // A value is available when every selected key that exists on this
+          // matrix row matches — ignore UI-only extras, the target key
+          // itself, and orphan ids that never appear in the matrix.
+          const matches = Object.entries(normalized).every(([key, value]) => {
+            if (key === targetKey) return true;
+            if (!(key in candidate)) return true;
+            const known = matrixValuesByKey.get(key);
+            if (known && !known.has(value)) return true;
+            return candidate[key] === value;
+          });
+          if (matches) values.add(candidate[targetKey]);
         }
         return [targetKey, [...values]];
       }),
